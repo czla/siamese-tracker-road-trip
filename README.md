@@ -17,7 +17,7 @@
         ##### Pipeline
         - ![pipeline](image/SINT/pipeline.png)
         ##### Candidate Sampling
-    	- Use the ***radius sampling strategy*** to generate candidate boxes. At each sample location, generate three scaled versions of the initial box with the scales being $\{\frac {\sqrt{2}} {2}, 1, \sqrt{2} \}$
+    	- Use the ***radius sampling strategy*** to generate candidate boxes. At each sample location, generate three scaled versions of the initial box with the scales being $$\{\frac {\sqrt{2}} {2}, 1, \sqrt{2} \}$$
         ##### SINT+
     	- The ***sampling range*** is adaptive to the image resolution, set to be 30/512 ∗ w in this experiment, where w is the image width.
     	- Given the pixels covered by the predicted box in the previous frame and the estimated ***optical flow***, remove the candidate boxes that contain less than 25% of those pixels in the current frame.
