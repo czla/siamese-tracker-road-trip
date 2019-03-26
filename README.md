@@ -23,6 +23,26 @@
     	- Given the pixels covered by the predicted box in the previous frame and the estimated ***optical flow***, remove the candidate boxes that contain less than 25% of those pixels in the current frame.
 -----
 - **2016_ECCV_Siamese-fc**
+    * **SiameseFC:** Luca Bertinetto, Jack Valmadre, João F. Henriques, Andrea Vedaldi, Philip H.S. Torr. "Fully-Convolutional Siamese Networks for Object Tracking." ECCV workshop (2016).[[paper](http://120.52.73.78/arxiv.org/pdf/1606.09549v2.pdf)][[project](http://www.robots.ox.ac.uk/~luca/siamese-fc.html)]
+    [[official-code-matlab](https://github.com/bertinetto/siamese-fc)][[code-pytorch](https://github.com/mozhuangb/SiameseFC-pytorch)][[code2-pytorch](https://github.com/GengZ/siameseFC-pytorch-vot)][[code-tensorflow](https://github.com/zzh142857/SiameseFC-tf)]
+        ##### Contributions
+    	- Achieves ***competitive performance*** in modern tracking benchmarks at speeds that ***far exceed the realtime requirement***.
+    	- Present a novel ***Siamese architecture that is fully-convolutional*** with respect to the search image.
+    	- Design a ***two-stream Siamese network*** specifically for tracking to learn the matching function.
+        ##### Pipeline
+        ![pipeline](image/SINT/pipeline.png)
+        ##### Method
+        	- Function h is ***fully-convolutional***: $h(L_{k\tau}x)=L_{\tau}h(x)$ for integer stride k and any translation $\tau$.
+	- The ***position of the maximum score*** relative to the centre of the score map, multiplied by the ***stride*** of the network, gives the displacement of the target from frame to frame.
+	- Train: discriminative approach, Logistic loss: $l(y,v)=log(1+exp(-yv))$, where v is the real-valued score of a single exemplar-candidate pair and y ∈
+{+1, −1} is its ground-truth label
+	- ***Multiple scales*** are searched in a single forward-pass by assembling a mini-batch of ***scaled images***.
+        ##### Candidate Sampling
+    	- Use the ***radius sampling strategy*** to generate candidate boxes. At each sample location, generate three scaled versions of the initial box with the scales being {√2/2, 1,√2}
+        ##### SINT+
+    	- The ***sampling range*** is adaptive to the image resolution, set to be 30/512 ∗ w in this experiment, where w is the image width.
+    	- Given the pixels covered by the predicted box in the previous frame and the estimated ***optical flow***, remove the candidate boxes that contain less than 25% of those pixels in the current frame.
+-----
 - **2017_CVPR_CFNet**
 - **2017_ICCV_DSiam**
 - **2017_Siamese_Survey**
