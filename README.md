@@ -8,6 +8,9 @@
 |    SINT     |                  -             |         0.625       |               0.848            |           -         |               -                |          -          |              -           |   4    |
 |SiameseFC-ResNet|     0.5527   |           -             |           -                       |         -             |             -                 |          -         |             -           |    25   |
 |SiameseFC-AlexNet|     0.5016   |           -             |           -                       |         -             |             -                 |          -         |             -           |    65   |
+|   CFNet-conv1     |            -       |        0.578           |           0.714               |         0.536         |          0.658          |      0.488      |       0.613         |    83   |
+|   CFNet-conv5     |            -       |        0.611           |           0.746               |         0.568         |          0.693          |      0.530      |       0.660         |    75   |
+|   CFNet-conv5     |            -       |        0.611           |           0.736               |         0.586         |          0.711          |      0.539      |       0.670         |    43   |
 -------
 ## Trackers
 - **2016_CVPR_SINT**
@@ -40,7 +43,7 @@
         ![pipeline](image/SiameseFC/pipeline.png)
 
         ##### Method
-        	- Function h is ***fully-convolutional*** : ![img](https://latex.codecogs.com/gif.latex?h%5C%28L_%7Bk%5Ctau%7Dx%5C%29%3DL_%7B%5Ctau%7Dh%5C%28x%5C%29) for integer stride k and any translation ![symbol](https://latex.codecogs.com/gif.latex?%5Ctau).
+        	- Function h is ***fully-convolutional*** if ![img](https://latex.codecogs.com/gif.latex?h%5C%28L_%7Bk%5Ctau%7Dx%5C%29%3DL_%7B%5Ctau%7Dh%5C%28x%5C%29) for integer stride k and any translation ![symbol](https://latex.codecogs.com/gif.latex?%5Ctau).
 	- The ***position of the maximum score*** relative to the centre of the score map, multiplied by the ***stride*** of the network, gives the displacement of the target from frame to frame.
 	- Train: discriminative approach, Logistic loss: ![img](https://latex.codecogs.com/gif.latex?l%5C%28y%2Cv%5C%29%3Dlog%5C%281&plus;exp%5C%28-yv%5C%29%5C%29), where v is the real-valued score of a single exemplar-candidate pair and y ∈
 {+1, −1} is its ground-truth label.
@@ -53,6 +56,20 @@
 	- ***elementary temporal constraints***: search area(four times its previous size); a cosine window is added to the score map to penalize large displacements.
 -----
 - **2017_CVPR_CFNet**
+    * **CFNet:** Jack Valmadre, Luca Bertinetto, João F. Henriques, Andrea Vedaldi, Philip H. S. Torr."End-to-end representation learning for Correlation Filter based tracking." CVPR (2017). 
+[[paper](http://openaccess.thecvf.com/content_cvpr_2017/papers/Valmadre_End-To-End_Representation_Learning_CVPR_2017_paper.pdf)]
+[[supp](http://openaccess.thecvf.com/content_cvpr_2017/supplemental/Valmadre_End-To-End_Representation_Learning_2017_CVPR_supplemental.pdf)]
+[[project](http://www.robots.ox.ac.uk/~luca/cfnet.html)]
+[[official-code-matlab](https://github.com/bertinetto/cfnet)]
+        ##### Contributions
+    	- Incorporating the Correlation Filter into the fully-convolutional Siamese framework(SiameseFC).
+
+        ##### Pipeline
+        ![pipeline](image/CFNet/pipeline.png)
+
+        ##### Method
+        	- Replace ![SiameseFC](https://latex.codecogs.com/gif.latex?g_p%28x%5E%7B%27%7D%2Cz%5E%7B%27%7D%29%3Df_p%28x%5E%7B%27%7D%29%5Cstar%20f_p%28z%5E%7B%27%7D%29) with ![CFNet](https://latex.codecogs.com/gif.latex?h_%7Bp%2Cs%2Cb%7D%28x%5E%7B%27%7D%2Cz%5E%7B%27%7D%29%3Dsw%28f_p%28x%5E%7B%27%7D%29%5Cstar%20f_p%28z%5E%7B%27%7D%29%29%20&plus;%20b)
+-----
 - **2017_ICCV_DSiam**
 - **2017_Siamese_Survey**
 - **2018_CVPR_RASNet**
