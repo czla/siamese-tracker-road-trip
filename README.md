@@ -46,10 +46,9 @@
 	- The ***position of the maximum score*** relative to the centre of the score map, multiplied by the ***stride*** of the network, gives the displacement of the target from frame to frame.
 	- Function h is ***fully-convolutional*** if: ![img](https://latex.codecogs.com/gif.latex?h%5C%28L_%7Bk%5Ctau%7Dx%5C%29%3DL_%7B%5Ctau%7Dh%5C%28x%5C%29) for integer stride k and any translation ![symbol](https://latex.codecogs.com/gif.latex?%5Ctau).
 	- Train: discriminative approach, Logistic loss: ![img](https://latex.codecogs.com/gif.latex?l%5C%28y%2Cv%5C%29%3Dlog%5C%281&plus;exp%5C%28-yv%5C%29%5C%29), where v is the real-valued score of a single exemplar-candidate pair and y ∈
-{+1, −1} is its ground-truth label.
-		Loss for a score map:
-		Positive example: within radius R of the centre (accounting for the stride k of the network).
-		![img](image/SiameseFC/positive.png)
+{+1, −1} is its ground-truth label.  
+	- Positive example: within radius R of the centre (accounting for the stride k of the network).
+	- Loss for a score map: ![img](https://latex.codecogs.com/gif.latex?y%5Bu%5D%3D%5Cbegin%7Bcases%7D%20&plus;1%20%5Cquad%20if%20%5C%20k%7C%7Cu-c%7C%7C%20%5Cle%20R%20%5C%5C%20-1%20%5Cquad%20otherwise.%20%5Cend%7Bcases%7D)
 	- ***Multiple scales*** are searched in a single forward-pass by assembling a mini-batch of ***scaled images***(scales 1.03^{−1,0,1}), any change in scale is penalized.
 	- ***backbone network***: AlexNet.
 	![network architecture](image/SiameseFC/architecture.png)
@@ -62,7 +61,7 @@
 [[project](http://www.robots.ox.ac.uk/~luca/cfnet.html)]
 [[official-code-matlab](https://github.com/bertinetto/cfnet)]
         ##### Contributions
-    	- Incorporating the Correlation Filter into the fully-convolutional Siamese framework(SiameseFC).
+	- Incorporating the Correlation Filter into the fully-convolutional Siamese framework(SiameseFC).
 	- Reveal that adding a Correlation Filter layer does not significantly improve the tracking accuracy
 
         ##### Pipeline
@@ -92,9 +91,9 @@
 
 ## TODO  
 - [ ] add road trip figure
-- [-] add link for paper&code&project
-- [-] add core analyses
-- [-] add benchmark comparison
+- [x] add link for paper&code&project
+- [x] add core analyses
+- [x] add benchmark comparison
 - [ ] finish all paper
 
 ## License
