@@ -40,7 +40,7 @@
     	- Present a novel ***Siamese architecture that is fully-convolutional*** with respect to the search image.
 
         ##### Pipeline
-        ![pipeline](image/SiameseFC/pipeline.png)
+        	![pipeline](image/SiameseFC/pipeline.png)  
 
         ##### Method
 	- The ***position of the maximum score*** relative to the centre of the score map, multiplied by the ***stride*** of the network, gives the displacement of the target from frame to frame.
@@ -48,7 +48,7 @@
 	- Train: discriminative approach, Logistic loss: ![img](https://latex.codecogs.com/gif.latex?l%5C%28y%2Cv%5C%29%3Dlog%5C%281&plus;exp%5C%28-yv%5C%29%5C%29), where v is the real-valued score of a single exemplar-candidate pair and y ∈
 {+1, −1} is its ground-truth label.  
 	- Positive example: within radius R of the centre (accounting for the stride k of the network).
-	- Loss for a score map: ![img](https://latex.codecogs.com/gif.latex?y%5Bu%5D%3D%5Cbegin%7Bcases%7D%20&plus;1%20%5Cquad%20if%20%5C%20k%7C%7Cu-c%7C%7C%20%5Cle%20R%20%5C%5C%20-1%20%5Cquad%20otherwise.%20%5Cend%7Bcases%7D)
+	- Loss for a score map: ![img](https://latex.codecogs.com/gif.latex?y%5Bu%5D%3D%5Cbegin%7Bcases%7D%20&plus;1%20%5Cquad%20if%20%5C%20k%7C%7Cu-c%7C%7C%20%5Cle%20R%20%5C%5C%20-1%20%5Cquad%20otherwise.%20%5Cend%7Bcases%7D)  
 	- ***Multiple scales*** are searched in a single forward-pass by assembling a mini-batch of ***scaled images***(scales 1.03^{−1,0,1}), any change in scale is penalized.
 	- ***backbone network***: AlexNet.
 	![network architecture](image/SiameseFC/architecture.png)
@@ -65,7 +65,7 @@
 	- Reveal that adding a Correlation Filter layer does not significantly improve the tracking accuracy
 
         ##### Pipeline
-        ![pipeline](image/CFNet/pipeline.png)
+        	![pipeline](image/CFNet/pipeline.png)  
 
         ##### Method
 	- Establishing an efficient back-propagation map for the solution to a system of circulant equations.
