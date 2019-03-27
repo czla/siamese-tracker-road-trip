@@ -1,4 +1,4 @@
-﻿siamese-tracker-road-trip
+﻿siamese-tracker-road-trip  
 基于孪生网络的单目标跟踪论文汇总
 ====
 
@@ -9,7 +9,7 @@
 |SiameseFC-ResNet|     0.5527   |           -             |           -                       |         -             |             -                 |          -         |             -           |    25   |
 |SiameseFC-AlexNet|     0.5016   |           -             |           -                       |         -             |             -                 |          -         |             -           |    65   |
 |   CFNet-conv1     |            -       |        0.578           |           0.714               |         0.536         |          0.658          |      0.488      |       0.613         |    83   |
-|   CFNet-conv5     |            -       |        0.611           |           0.746               |         0.568         |          0.693          |      0.530      |       0.660         |    75   |
+|   CFNet-conv2     |            -       |        0.611           |           0.746               |         0.568         |          0.693          |      0.530      |       0.660         |    75   |
 |   CFNet-conv5     |            -       |        0.611           |           0.736               |         0.586         |          0.711          |      0.539      |       0.670         |    43   |
 -------
 ## Trackers
@@ -43,7 +43,7 @@
         ![pipeline](image/SiameseFC/pipeline.png)
 
         ##### Method
-        	- Function h is ***fully-convolutional*** if ![img](https://latex.codecogs.com/gif.latex?h%5C%28L_%7Bk%5Ctau%7Dx%5C%29%3DL_%7B%5Ctau%7Dh%5C%28x%5C%29) for integer stride k and any translation ![symbol](https://latex.codecogs.com/gif.latex?%5Ctau).
+        	- Function h is ***fully-convolutional*** if: ![img](https://latex.codecogs.com/gif.latex?h%5C%28L_%7Bk%5Ctau%7Dx%5C%29%3DL_%7B%5Ctau%7Dh%5C%28x%5C%29) for integer stride k and any translation ![symbol](https://latex.codecogs.com/gif.latex?%5Ctau).
 	- The ***position of the maximum score*** relative to the centre of the score map, multiplied by the ***stride*** of the network, gives the displacement of the target from frame to frame.
 	- Train: discriminative approach, Logistic loss: ![img](https://latex.codecogs.com/gif.latex?l%5C%28y%2Cv%5C%29%3Dlog%5C%281&plus;exp%5C%28-yv%5C%29%5C%29), where v is the real-valued score of a single exemplar-candidate pair and y ∈
 {+1, −1} is its ground-truth label.
