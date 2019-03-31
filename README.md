@@ -11,6 +11,9 @@
 |   CFNet-conv1     |            -       |        0.578           |           0.714               |         0.536         |          0.658          |      0.488      |       0.613         |    83   |
 |   CFNet-conv2     |            -       |        0.611           |           0.746               |         0.568         |          0.693          |      0.530      |       0.660         |    75   |
 |   CFNet-conv5     |            -       |        0.611           |           0.736               |         0.586         |          0.711          |      0.539      |       0.670         |    43   |
+|   DSiam     |         0.5414      |        0.642           |           0.860               |         -         |          -          |      -      |       -         |    45   |
+|   DSiamM     |           0.5566       |        0.656           |           0.891               |         -         |          -          |      -      |       -         |    25   |
+
 -------
 ## Trackers
 - **2016_CVPR_SINT**
@@ -83,10 +86,11 @@
 
         ##### Pipeline
         ![pipeline](image/DSiam/pipeline.png)  
-        	- Basic pipeline of our DSiam network (orange line) and that of SiamFC(black dashed line).f^l(·) represents a CNN to extract the deep feature at lth layer. 
-	- Two transformations are rapidly learned from frame t−1. When the target at frame t (redbox) is entirely different from the template O1, SiamFC gets a meaningless response map, within which no target can be detected
+        - Basic pipeline of our DSiam network (orange line) and that of SiamFC(black dashed line).f^l(·) represents a CNN to extract the deep feature at lth layer.  
+		- Two transformations are rapidly learned from frame t−1. When the target at frame t (redbox) is entirely different from the template O1, SiamFC gets a meaningless response map, within which no target can be detected
 
         ##### Method
+		
 		- Establishing an efficient back-propagation map for the solution to a system of circulant equations.
 		- Replace ![SiameseFC](https://latex.codecogs.com/gif.latex?S_t%5El%3Dcorr%28f%5El%28O_1%29%2Cf%5El%28Z_t%29%29) with ![CFNet](https://latex.codecogs.com/gif.latex?S_t%5El%3Dcorr%28V_%7Bt-1%7D%5El*f%5El%28O_1%29%2CW_%7Bt-1%7D%5El*f%5El%28Z_t%29%29)
 		- ![v_t-1](https://latex.codecogs.com/gif.latex?V_%7Bt-1%7D%5El) aims to encourage ![f](https://latex.codecogs.com/gif.latex?f%5El%28O_1%29)
@@ -94,7 +98,12 @@ being similar to ![f](https://latex.codecogs.com/gif.latex?f%5El%28O_%7Bt-1%7D%2
 		- ![w_t-1](https://latex.codecogs.com/gif.latex?W_%7Bt-1%7D%5El) aims to highlight the deep feature of target neighborhood regions and alleviate the interference of irrelevant background features.
        #####  Elementwise multi-layer fusion
 		- Response map for each layer l is ![rmap](https://latex.codecogs.com/gif.latex?S_t%20%5Cin%20R%5E%7Bm_s%20%5Ctimes%20n_s%7D), elementwise weight map ![wmap](https://latex.codecogs.com/gif.latex?W%5El%20%5Cin%20R%5E%7Bm_s%20%5Ctimes%20n_s%7D) and
-![sum](https://latex.codecogs.com/gif.latex?%5Csum_%7Bl%20%5Cin%20L%7D%20W%5El%20%3D%201_%7Bm_s%20%5Ctimes%20n_s%7D), ***final response map*** ![fmap](https://latex.codecogs.com/gif.latex?%5Csum_%7Bl%20%5Cin%20L%7D%20W%5El%20%5Codot%20S_t%5El), where ![odot](https://latex.codecogs.com/gif.latex?%5Codot) denotes the elementwise multiplication
+![sum](https://latex.codecogs.com/gif.latex?%5Csum_%7Bl%20%5Cin%20L%7D%20W%5El%20%3D%201_%7Bm_s%20%5Ctimes%20n_s%7D), ***final response map*** ![fmap](https://latex.codecogs.com/gif.latex?%5Csum_%7Bl%20%5Cin%20L%7D%20W%5El%20%5Codot%20S_t%5El), where ![odot](https://latex.codecogs.com/gif.latex?%5Codot) denotes the elementwise multiplication.  
+
+        - Two real offline learned fusion weight maps:  
+            ![weight maps](image/DSiam/weight_map.png)
+			S: response map, layer (l1 = 5, l2=4) from AlexNet. **Note** , the response map of deeper layer l1 has higher weights in periphery and lower weights at central part within the searching region.
+
 ------
 - **2017_Siamese_Survey**
 - **2018_CVPR_RASNet**
