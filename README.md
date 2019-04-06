@@ -106,6 +106,20 @@ being similar to ![f](https://latex.codecogs.com/gif.latex?f%5El%28O_%7Bt-1%7D%2
 
 ------
 - **2017_Siamese_Survey**
+    * **Survey:** Roman Pflugfelder."An In-Depth Analysis of Visual Tracking with Siamese Neural Networks." Arxiv,(2017).
+[[paper](https://arxiv.org/pdf/1707.00569.pdf)]
+        ##### Contributions
+		- Propose a new formulation of tracking inference and learning from the viewpoint of stochastic processes, statistical decision theory and machine learning.
+		- Give an in-depth analysis and detailed comparison of nine siamese-based trackers.
+
+        ##### Pipeline
+        ![pipeline](image/DSiam/pipeline.png)  
+        - Basic pipeline of our DSiam network (orange line) and that of SiamFC(black dashed line).f^l(·) represents a CNN to extract the deep feature at lth layer.  
+		- Two transformations are rapidly learned from frame t−1. When the target at frame t (redbox) is entirely different from the template O1, SiamFC gets a meaningless response map, within which no target can be detected
+
+        ##### Method
+		
+		- Establishing an efficient back-propagation map for the 
 - **2018_CVPR_RASNet**
 - **2018_CVPR_SA-Siam**
 - **2018_CVPR_SiameseRPN**
