@@ -2,17 +2,18 @@
 基于孪生网络的单目标跟踪论文汇总
 ====
 
-|   Tracker   | Accuracy-VOT2015 |AUC-CVPR2013 | Precision-CVPR2013 | AUC-OTB100 | Precision-OTB100 | AUC-OTB50 | Precision-OTB50 |  FPS  |
-| :---------: |        :----------:       |   :----------:      |     :----------------:      |    :--------:    |   :--------------:     |     :-------:      |   :-------------:   | :----: |
-|    SINT+    |                 -            |        0.655          |             0.882             |          -          |               -               |         -            |            -             |  4     |
-|    SINT     |                  -             |         0.625       |               0.848            |           -         |               -                |          -          |              -           |   4    |
-|SiameseFC-ResNet|     0.5527   |           -             |           -                       |         -             |             -                 |          -         |             -           |    25   |
-|SiameseFC-AlexNet|     0.5016   |           -             |           -                       |         -             |             -                 |          -         |             -           |    65   |
-|   CFNet-conv1     |            -       |        0.578           |           0.714               |         0.536         |          0.658          |      0.488      |       0.613         |    83   |
-|   CFNet-conv2     |            -       |        0.611           |           0.746               |         0.568         |          0.693          |      0.530      |       0.660         |    75   |
-|   CFNet-conv5     |            -       |        0.611           |           0.736               |         0.586         |          0.711          |      0.539      |       0.670         |    43   |
-|   DSiam     |         0.5414      |        0.642           |           0.860               |         -         |          -          |      -      |       -         |    45   |
-|   DSiamM     |           0.5566       |        0.656           |           0.891               |         -         |          -          |      -      |       -         |    25   |
+|   Tracker   | Accuracy-VOT2015 | EAO-VOT2015 | EAO-VOT2017 |AUC-CVPR2013 | Precision-CVPR2013 | AUC-OTB100 | Precision-OTB100 | AUC-OTB50 | Precision-OTB50 |  FPS  |
+| :---------: |  :---------: | :---------: |       :----------:       |   :----------:      |     :----------------:      |    :--------:    |   :--------------:     |     :-------:      |   :-------------:   | :----: |
+|    SINT+    |                 -            |     -            |    -            |       0.655          |             0.882             |          -          |               -               |         -            |            -             |  4     |
+|    SINT     |                  -             |     -            |    -            |        0.625       |               0.848            |           -         |               -                |          -          |              -           |   4    |
+|SiameseFC-ResNet|     0.5527   |         -            |    -            |      -             |           -                       |         -             |             -                 |          -         |             -           |    25   |
+|SiameseFC-AlexNet|     0.5016   |        -            |    0.2      |       -             |           -                       |         -             |             -                 |          -         |             -           |    65   |
+|   CFNet-conv1     |            -       |      -            |    -            |      0.578           |           0.714               |         0.536         |          0.658          |      0.488      |       0.613         |    83   |
+|   CFNet-conv2     |            -       |     -            |    -            |       0.611           |           0.746               |         0.568         |          0.693          |      0.530      |       0.660         |    75   |
+|   CFNet-conv5     |            -       |      -            |    -            |      0.611           |           0.736               |         0.586         |          0.711          |      0.539      |       0.670         |    43   |
+|   DSiam     |         0.5414      |        -            |    -            |    0.642           |           0.860               |         -         |          -          |      -      |       -         |    45   |
+|   DSiamM     |           0.5566       |      -            |    -            |      0.656           |           0.891               |         -         |          -          |      -      |       -         |    25   |
+|   RASNet     |          -       |      0.327        |    0.281     |      0.670           |           0.892               |        0.642      |          -          |      -      |       -         |    83   |
 
 -------
 ## Trackers
@@ -105,22 +106,24 @@ being similar to ![f](https://latex.codecogs.com/gif.latex?f%5El%28O_%7Bt-1%7D%2
 			S: response map, layer (l1 = 5, l2=4) from AlexNet. **Note** , the response map of deeper layer l1 has higher weights in periphery and lower weights at central part within the searching region.
 
 ------
-- **2017_Siamese_Survey**
-    * **Survey:** Roman Pflugfelder."An In-Depth Analysis of Visual Tracking with Siamese Neural Networks." Arxiv,(2017).
-[[paper](https://arxiv.org/pdf/1707.00569.pdf)]
+- **2018_CVPR_RASNet**
+    * **RASNet:** Qiang Wang, Zhu Teng, Junliang Xing, Jin Gao, Weiming Hu, Stephen Maybank. "Learning Attentions: Residual Attentional Siamese Network for High Performance Online Visual Tracking." CVPR (2018).
+[[paper](http://openaccess.thecvf.com/content_cvpr_2018/papers/Wang_Learning_Attentions_Residual_CVPR_2018_paper.pdf)]
         ##### Contributions
-		- Propose a new formulation of tracking inference and learning from the viewpoint of stochastic processes, statistical decision theory and machine learning.
-		- Give an in-depth analysis and detailed comparison of nine siamese-based trackers.
+		- Different kinds of attention mechanisms are explored within the RASNet: ***General Attention, Residual Attention***, and ***Channel Attention***.
+		- Propose an end-to-end deep architecture specifically designed for the object tracking.
 
         ##### Pipeline
-        ![pipeline](image/DSiam/pipeline.png)  
-        - Basic pipeline of our DSiam network (orange line) and that of SiamFC(black dashed line).f^l(·) represents a CNN to extract the deep feature at lth layer.  
-		- Two transformations are rapidly learned from frame t−1. When the target at frame t (redbox) is entirely different from the template O1, SiamFC gets a meaningless response map, within which no target can be detected
+        ![pipeline](image/RASNet/pipeline.png)  
+        - Weighted cross correlation layer (WXCorr).  
+		- Based on the exemplar features, three types of attentions are extracted. Exemplar and search features, along with the attentions as weights are inputed to WXCorr and finally transformed to a response map.
 
         ##### Method
+		- Weighted Cross Correlation: not every constituent provides the same contribution to the cross correlation operation in the Siamese network.the object within the blue rectangular region should be reflected more to the cross correlation operation compared with the green rectangular region.
+		![WXCorr](image/RASNet/WXCorr.png)
+		- Channel Attention: A convolutional ***feature channel*** often corresponds to a certain type of ***visual pattern***.  In certain circumstance some feature channels are more significant than the others.
+		- Baseline: SiamFC
 		
-		- Establishing an efficient back-propagation map for the 
-- **2018_CVPR_RASNet**
 - **2018_CVPR_SA-Siam**
 - **2018_CVPR_SiameseRPN**
 - **2018_CVPR_SINT++**
