@@ -111,7 +111,7 @@
 		- Based on the exemplar features, three types of attentions are extracted. Exemplar and search features, along with the attentions as weights are inputed to WXCorr and finally transformed to a response map.
 
         ##### Method
-		- Weighted Cross Correlation: not every constituent provides the same contribution to the cross correlation operation in the Siamese network.the object within the blue rectangular region should be reflected more to the cross correlation operation compared with the green rectangular region.
+		- ***Weighted Cross Correlation***: not every constituent provides the same contribution to the cross correlation operation in the Siamese network.the object within the blue rectangular region should be reflected more to the cross correlation operation compared with the green rectangular region.
 		![WXCorr](image/RASNet/WXCorr.png)
 		- Channel Attention: A convolutional ***feature channel*** often corresponds to a certain type of ***visual pattern***.  In certain circumstance some feature channels are more significant than the others.
 		- Baseline: SiamFC
@@ -130,13 +130,18 @@
 
         ##### Method
 		- ***Symbols***: **z**(the images of target), **z^s**(target with surrounding context, same size as search region), **X**(search region).
-		- ***The appearance branch***: response ![response-a](https://latex.codecogs.com/gif.latex?h_a(z,&space;X)&space;=&space;corr(f_a(z),&space;f_a(X)))
-		- ***The semantic branch***: The S-Net is loaded from a pretrained AlexNet on ImageNet, last two convolution layers(***conv4 and conv5***) are used. The concatenated multilevel features(denoted as ***fs*** ). ***Fusion module***, implemented by 1×1 ConvNet.
+		- ***The appearance branch***: 
+		response ![response-a](https://latex.codecogs.com/gif.latex?h_a(z,&space;X)&space;=&space;corr(f_a(z),&space;f_a(X)))
+		- ***The semantic branch***: 
+		The S-Net is loaded from a pretrained AlexNet on ImageNet, last two convolution layers(***conv4 and conv5***) are used. <br/>
+		The concatenated multilevel features(denoted as ***fs*** ). ***Fusion module***, implemented by 1×1 ConvNet.<br/>
 		response ![response-s](https://latex.codecogs.com/gif.latex?h_s%28z%5Es%2C%20X%29%20%3D%20corr%28g%28%5Cxi%20%5Ccdot%20f_s%28z%29%29%2C%20g%28f_s%28X%29%29%29)
-		- ***final response***: ![response-f](https://latex.codecogs.com/gif.latex?h%28z%5Es%2C%20X%29%20%3D%20%5Clambda%20h_a%28z%2C%20X%29%20&plus;%20%281-%20%5Clambda%29%20h_s%20%28z%5Es%2C%20X%29), where ***λ*** is the weighting parameter to balance the importance of the two branches, which can be estimated from a validation set.
+		- ***final response***:
+		![response-f](https://latex.codecogs.com/gif.latex?h%28z%5Es%2C%20X%29%20%3D%20%5Clambda%20h_a%28z%2C%20X%29%20&plus;%20%281-%20%5Clambda%29%20h_s%20%28z%5Es%2C%20X%29),<br/>	where ***λ*** is the weighting parameter to balance the importance of the two branches, which can be estimated from a validation set.
 		- ***Channel Attention in Semantic Branch***:
-		Divide the feature map into 3 × 3 grids, ***Max pooling*** is performed within each grid, and then a ***two-layer multilayer perceptron(MLP)*** is used to produce a coefficient for this channel. Finally, a ***Sigmoid function with bias*** is used to generate the final output weight ξi.
-		![channel_attention](image/SA-Siam/channel_attention.png)
+		<br/> Divide the feature map into 3 × 3 grids, ***Max pooling*** is performed within each grid, and then a ***two-layer multilayer perceptron(MLP)*** is used to produce a coefficient for this channel. <br/>
+		Finally, a ***Sigmoid function with bias*** is used to generate the final output weight ξi.<br/>
+		![channel_attention](image/SA-Siam/channel_attention.png)<br/>
 		***Note***: this module is passed only once for the first frame of a tracking sequence. The computational overhead is negligible.
 
 - **2018_CVPR_SiameseRPN**
