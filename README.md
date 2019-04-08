@@ -131,7 +131,7 @@
         ##### Method
 		- ***Symbols***: **z**(the images of target), **z^s**(target with surrounding context, same size as search region), **X**(search region).
 		- ***The appearance branch***: response ![response-a](https://latex.codecogs.com/gif.latex?h_a(z,&space;X)&space;=&space;corr(f_a(z),&space;f_a(X)))
-		- ***The semantic branch***: The S-Net is loaded from a pretrained AlexNet on ImageNet, last two convolution layers(***conv4 and conv5***) are used. The concatenated multilevel features(denoted as ***f_s()***). ***Fusion module***, implemented by 1×1 ConvNet.
+		- ***The semantic branch***: The S-Net is loaded from a pretrained AlexNet on ImageNet, last two convolution layers(***conv4 and conv5***) are used. The concatenated multilevel features(denoted as ***fs*** ). ***Fusion module***, implemented by 1×1 ConvNet.
 		response ![response-s](https://latex.codecogs.com/gif.latex?h_s%28z%5Es%2C%20X%29%20%3D%20corr%28g%28%5Cxi%20%5Ccdot%20f_s%28z%29%29%2C%20g%28f_s%28X%29%29%29)
 		- ***final response***: ![response-f](https://latex.codecogs.com/gif.latex?h%28z%5Es%2C%20X%29%20%3D%20%5Clambda%20h_a%28z%2C%20X%29%20&plus;%20%281-%20%5Clambda%29%20h_s%20%28z%5Es%2C%20X%29), where ***λ*** is the weighting parameter to balance the importance of the two branches, which can be estimated from a validation set.
 		- ***Channel Attention in Semantic Branch***:![channel_attention](image/SA-Siam/channel_attention.png)
