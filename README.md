@@ -1,6 +1,6 @@
-﻿siamese-tracker-road-trip  
-基于孪生网络的单目标跟踪论文汇总
-====
+﻿# siamese-tracker-road-trip  <br/> 基于孪生网络的单目标跟踪论文汇总
+
+## Performance
 
 |   Tracker   | Accuracy-VOT2015 | EAO-VOT2015 | EAO-VOT2017 |AUC-CVPR2013 | Precision-CVPR2013 | AUC-OTB100 | Precision-OTB100 | AUC-OTB50 | Precision-OTB50 |  FPS  |
 | :---------: |  :---------: | :---------: |       :----------:       |   :----------:      |     :----------------:      |    :--------:    |   :--------------:     |     :-------:      |   :-------------:   | :----: |
@@ -17,7 +17,9 @@
 |   SA-Siam     |         0.59       |       0.31        |     0.236     |      0.676           |           0.894               |        0.656      |        0.864        |      0.610    |       0.823      |    50   |
 
 -------
+
 ## Trackers
+
 - **2016_CVPR_SINT**
     * **SINT**:R. Tao, E. Gavves, and A. W. Smeulders. Siamese instance search for tracking. In IEEE Conference on Computer Vision and Pattern Recognition, 2016[[paper](http://openaccess.thecvf.com/content_cvpr_2016/papers/Tao_Siamese_Instance_Search_CVPR_2016_paper.pdf)][[code](https://github.com/taotaoorange/SINT)][[project](https://taotaoorange.github.io/projects/SINT/SINT_proj.html)]  
 
@@ -145,6 +147,38 @@
 		***Note***: this module is passed only once for the first frame of a tracking sequence. The computational overhead is negligible.
 
 - **2018_CVPR_SiameseRPN**
+    * **SiamRPN:** Bo Li, Wei Wu, Zheng Zhu, Junjie Yan."High Performance Visual Tracking with Siamese Region Proposal Network." CVPR (2018 **Spotlight**).[[paper](http://openaccess.thecvf.com/content_cvpr_2018/papers/Li_High_Performance_Visual_CVPR_2018_paper.pdf)][[code-pytorch](https://github.com/songdejia/Siamese-RPN-pytorch)][[code-pytorch](https://github.com/HelloRicky123/Siamese-RPN)]
+
+        ##### Contributions	
+		- propose the ***Siamese region proposal*** network (SiameseRPN) which is end-to-end trained off-line with large-scale image pairs for the tracking task.
+		- During online tracking, the proposed framework is formulated as a ***local oneshot detection*** task, which can refine the proposal to discard the expensive multi-scale test.
+		- It achieves leading performance in VOT2015, VOT2016 and VOT2017 real-time challenges with the ***speed of 160 FPS***, which proves its advantages in both ***accuracy and efficiency***.
+
+        ##### Pipeline
+        ![pipeline](image/SiamRPN/pipeline.png)<br/>
+		- ***Left***: Siamese subnetwork for feature extraction
+		- ***Middle***: Region proposal subnetwork, which has a ***classification*** branch and a ***regression*** branch. Pair-wise correlation is adopted to obtain the output of two branches.
+		- ***Right***: Details of these two output feature maps.
+			* In classification branch, the output feature map has ***2k*** channels which corresponding to foreground and background of k anchors.
+			* In regression branch, the output feature map has ***4k*** channels which corresponding to four coordinates used for proposal refinement of ***k anchors***.
+			* In the figure, ⋆ denotes correlation operator
+
+        ##### Method
+		- ***Loss Function***: 
+			* For classification(***cross-entropy*** loss), for regression(***smooth L1*** loss), which is same as ***Faster R-CNN***.
+			* Regression: Use ***normalized coordinates***, Let Ax, Ay, Aw, Ah denote center point and shape of the anchor boxes and let Tx, Ty, Tw, Th denote those of the ground truth boxes, the normalized distance is:<br/>
+			&emsp;&emsp;&emsp; ![norm_distance](https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cdelta%5B0%5D%3D%20%5Cfrac%7BT_x-A_x%7D%7BA_w%7D%2C%20%5Cdelta%5B1%5D%3D%20%5Cfrac%7BT_y-A_y%7D%7BA_h%7D%2C%20%5Cdelta%5B2%5D%3D%20ln%5Cfrac%7BT_w%7D%7BA_w%7D%2C%5Cdelta%5B3%5D%3D%20ln%5Cfrac%7BT_h%7D%7BA_h%7D)
+			* Smooth L1 loss:<br/>
+			&emsp;&emsp;&emsp;&emsp;![smooth_l1](https://latex.codecogs.com/gif.latex?%5Cinline%20smooth_%7BL1%7D%28x%2C%20%5Csigma%29%3D%20%5Cbegin%7Bcases%7D%200.5%7B%5Csigma%7D%5E2%20x%5E2%2C%20%5C%20%7Cx%7C%3C%20%5Cfrac%7B1%7D%7B%7B%5Csigma%7D%5E2%7D%20%5C%5C%20%7Cx%7C-%20%5Cfrac%7B1%7D%7B2%7B%5Csigma%7D%5E2%7D%20%2C%20%5C%20%7Cx%7C%20%5Cge%20%5Cfrac%7B1%7D%7B%7B%5Csigma%7D%5E2%7D%20%5Cend%7Bcases%7D)
+			* Regression loss:<br/>
+			&emsp;&emsp;&emsp; ![L_reg](https://latex.codecogs.com/gif.latex?%5Cinline%20L_%7Breg%7D%20%3D%20%5Csum_%7Bi%3D0%7D%5E3smooth_%7BL1%7D%28%5Cdelta%5Bi%5D%2C%5Csigma%29)
+			* Final loss: λ is hyper-parameter to balance the two parts.<br/>
+			&emsp;&emsp;&emsp; ![loss](https://latex.codecogs.com/gif.latex?%5Cinline%20loss%20%3D%20L_%7Bcls%7D%20&plus;%20%5Clambda%20L_%7Breg%7D)
+		- ***RPN***: 
+			* ***Anchor***: Only one scale with different ratios[0.33, 0.5, 1, 2, 3], less than detection task because the same object in two adjacent frames won’t change much.
+			* ***Training samples***: Positive(IOU > 0.6) and Negative(IOU < 0.3)<br/>
+			At most 16 positive samples and totally 64 samples from one training pair.
+
 - **2018_CVPR_SINT++**
 - **2018_ECCV_DaSiamRPN**
 - **2018_ECCV_Siam-BM**
