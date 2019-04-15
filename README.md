@@ -170,11 +170,12 @@
 			* Regression: Use ***normalized coordinates***, Let Ax, Ay, Aw, Ah denote center point and shape of the anchor boxes and let Tx, Ty, Tw, Th denote those of the ground truth boxes, the normalized distance is:<br/>
 			&emsp;&emsp;&emsp; ![norm_distance](https://latex.codecogs.com/gif.latex?%5Cinline%20%5Cdelta%5B0%5D%3D%20%5Cfrac%7BT_x-A_x%7D%7BA_w%7D%2C%20%5Cdelta%5B1%5D%3D%20%5Cfrac%7BT_y-A_y%7D%7BA_h%7D%2C%20%5Cdelta%5B2%5D%3D%20ln%5Cfrac%7BT_w%7D%7BA_w%7D%2C%5Cdelta%5B3%5D%3D%20ln%5Cfrac%7BT_h%7D%7BA_h%7D)
 			* Smooth L1 loss:<br/>
-			&emsp;&emsp;&emsp;&emsp;![smooth_l1](https://latex.codecogs.com/gif.latex?%5Cinline%20smooth_%7BL1%7D%28x%2C%20%5Csigma%29%3D%20%5Cbegin%7Bcases%7D%200.5%7B%5Csigma%7D%5E2%20x%5E2%2C%20%5C%20%7Cx%7C%3C%20%5Cfrac%7B1%7D%7B%7B%5Csigma%7D%5E2%7D%20%5C%5C%20%7Cx%7C-%20%5Cfrac%7B1%7D%7B2%7B%5Csigma%7D%5E2%7D%20%2C%20%5C%20%7Cx%7C%20%5Cge%20%5Cfrac%7B1%7D%7B%7B%5Csigma%7D%5E2%7D%20%5Cend%7Bcases%7D)
+			&emsp;&emsp;&emsp;&emsp;
+			![smooth_l1](image/SiamRPN/smooth_l1.gif)
 			* Regression loss:<br/>
 			&emsp;&emsp;&emsp; ![L_reg](https://latex.codecogs.com/gif.latex?%5Cinline%20L_%7Breg%7D%20%3D%20%5Csum_%7Bi%3D0%7D%5E3smooth_%7BL1%7D%28%5Cdelta%5Bi%5D%2C%5Csigma%29)
 			* Final loss: λ is hyper-parameter to balance the two parts.<br/>
-			&emsp;&emsp;&emsp; ![loss](https://latex.codecogs.com/gif.latex?%5Cinline%20loss%20%3D%20L_%7Bcls%7D%20&plus;%20%5Clambda%20L_%7Breg%7D)
+			&emsp;&emsp;&emsp; ![loss](image/SiamRPN/loss.gif)
 		- ***RPN***: 
 			* ***Anchor***: Only one scale with different ratios[0.33, 0.5, 1, 2, 3], less than detection task because the same object in two adjacent frames won’t change much.
 			* ***Training samples***: Positive(IOU > 0.6) and Negative(IOU < 0.3)<br/>
