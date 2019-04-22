@@ -234,6 +234,20 @@
 
 ------
 - **2018_ECCV_DaSiamRPN**
+    * **DaSiamRPN:** Zheng Zhu, Qiang Wang, Bo Li, Wu Wei, Junjie Yan, Weiming Hu. "Distractor-aware Siamese Networks for Visual Object Tracking." ECCV (2018). [[paper](http://openaccess.thecvf.com/content_ECCV_2018/papers/Zheng_Zhu_Distractor-aware_Siamese_Networks_ECCV_2018_paper.pdf)][[code](https://github.com/foolwood/DaSiamRPN)]
+
+        ##### Contributions	
+        - Find that the imbalance of the ***non-semantic*** background and ***semantic distractor*** in the training data is the main obstacle for the learning.
+        - Propose a novel Distractor-aware Siamese Region Proposal Networks(DaSiamRPN) framework to learn distractor-aware features in the off-line training, and explicitly suppress distractors during the inference of online tracking.
+        - Extend the DaSiamRPN to perform ***long-term*** tracking by introducing a simple yet effective local-to-global search region strategy, which significantly improves the performance of our tracker in ***out-of-view and full occlusion*** challenges.
+
+        ##### Motivation
+        - The non-semantic background occupies the majority, while semantic entities and distractor occupy less. This imbalanced distribution makes the training model hard to learn instance-level representation, but tending to learn the differences between foreground and background.
+        - Actively generate more semantics pairs in the offline training process.
+
+        ##### Method
+        - ***Distractor-aware Training***:
+
 - **2018_ECCV_Siam-BM**
 - **2018_ECCV_SiamFC-tri**
 - **2018_ECCV_StructSiam**
