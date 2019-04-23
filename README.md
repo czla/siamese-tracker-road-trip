@@ -3,7 +3,7 @@
 ## Performance
 * Note
     - Ranked by publish time.
-    - Performance details are gathered from original papers, not tested in the same platform.
+    - Performance details are gathered from original papers, not tested under the same platform.
     - OP: meanoverlap precision at the threshold of 0.5.
     - DP/Precision: mean distance precision of 20 pixels.
     - EAO: expected average overlap.
