@@ -1,6 +1,12 @@
 ﻿# siamese-tracker-road-trip  <br/> 基于孪生网络的单目标跟踪论文汇总
 
 ## Performance
+* Note
+    - Ranked by publish time.
+    - Performance details are gathered from original papers, not tested in the same platform.
+    - OP: meanoverlap precision at the threshold of 0.5.
+    - DP/Precision: mean distance precision of 20 pixels.
+    - EAO: expected average overlap.
 
 |   Tracker   | Accuracy-VOT2015/2016 | EAO-VOT2015/2016 | EAO-VOT2017 |AUC-CVPR2013 | Precision-CVPR2013 | AUC-OTB100 | Precision-OTB100 | AUC-OTB50 | Precision-OTB50 |  FPS  |
 | :---------: |  :---------: | :---------: |       :----------:       |   :----------:      |     :----------------:      |    :--------:    |   :--------------:     |     :-------:      |   :-------------:   | :----: |
@@ -17,6 +23,7 @@
 |   SA-Siam     |         0.59       |       0.31        |     0.236     |      0.676           |           0.894               |        0.656      |        0.864        |      0.610    |       0.823      |    50   |
 |   SiamRPN     |         0.58/0.56       |       0.358/0.3441        |     0.243     |      -           |           -               |        0.637      |        0.851        |      -    |       -      |    160   |
 |    SINT++     |                  -             |     -            |    -            |        -       |               -            |           0.574         |               0.768                |          0.624          |              0.839           |   <4    |
+|   DaSiamRPN     |         0.63/0.61       |       0.446/0.411        |     0.326     |      -           |           -               |        0.865(OP)      |        0.88        |      -    |       -      |    160   |
 
 -------
 
@@ -244,10 +251,29 @@
         ##### Motivation
         - The non-semantic background occupies the majority, while semantic entities and distractor occupy less. This imbalanced distribution makes the training model hard to learn instance-level representation, but tending to learn the differences between foreground and background.
         - Actively generate more semantics pairs in the offline training process.
+        - Response comparasion<br/>
+        &emsp; ![response](image/DaSiamRPN/response.png)
 
         ##### Method
-        - ***Distractor-aware Training***:
+        - ***Distractor-aware Training***:<br/>
+            * Diverse categories of positive pairs can promote the generalization ability.
+            * Semantic negative pairs can improve the discriminative ability.
+            * Customizing effective data augmentation for visual tracking.(Except the common ***translation***, ***scale variations*** and ***illumination changes***, introduce ***motion blur***)
+            * Training pairs<br/>
+            &emsp; ![train_pairs](image/DaSiamRPN/train_pairs.png)
+        
+        - ***Distractor-aware Incremental Learning***:<br/>
+            * Use ***NMS*** to select the potential distractors *d_i* in each frames. Then collect a distractor set *D := {∀ d_i ∈ D, f(z, d_i) > h ∩ d_i != z_t*}, where *h* is the predefined threshold, *z_t* is the selected target in frame *t* and the number of this set *|D| = n*.
+            * Specifically, we get 17x17x5 proposals in each frame at first, and then we use NMS to reduce redundant candidates.
+            * The proposal with highest score will be selected as the target zt. For the remaining, the proposals with scores greater than a threshold are selected as distractors.<br/>
+            * Introduce a novel distractor-aware objective function to rerank the proposals *P* which have *top-k* similarities with the exemplar. <br/>
+            &emsp;&emsp; The weight factor *α^hat* control the influence of the distractor learning, the weight factor *α_i* is used to control the influence for each distractor *d_i*.<br/>
+            ***Final selected object***:<br/>
+            &emsp; ![func](https://latex.codecogs.com/gif.latex?\large&space;q&space;=&space;\mathop{argmax}\limits_{p_k&space;\in&space;P}\&space;f(z,&space;p_k)&space;-&space;\frac{\hat{\alpha}\sum_{i=1}^n&space;\alpha_i&space;f(d_i,p_k)}{\sum_{i=1}^n&space;\alpha_i})<br/>
+            ***SiamRPN***:<br/>
+            &emsp; ![func2](https://latex.codecogs.com/gif.latex?\large&space;q&space;=&space;\mathop{argmax}\limits_{p_k&space;\in&space;P}\&space;f(z,&space;p_k)})
 
+------
 - **2018_ECCV_Siam-BM**
 - **2018_ECCV_SiamFC-tri**
 - **2018_ECCV_StructSiam**
