@@ -285,6 +285,12 @@
 ## Survey
 * **2017**: R. Pflugfelder. An in-depth analysis of visual tracking with siamese neural networks. arXiv:1707.00569, 2017[[paper](https://arxiv.org/pdf/1707.00569.pdf)]  
 
+## About OTB
+* **OTB2013** was proposed in the **CVPR2013**. (51 targets and 50 videos.[Jogging_1 + Jogging_2])
+[Online Object Tracking: A Benchmark](http://openaccess.thecvf.com/content_cvpr_2013/papers/Wu_Online_Object_Tracking_2013_CVPR_paper.pdf)
+* **TB-50** and **TB-100** were proposed in the **PAMI2015**. (TB-50 is consisted by 50 **difficult** sequences among TB-100. The partition can be found in http://cvlab.hanyang.ac.kr/tracker_benchmark/datasets.html ）
+* Please note that **TB-50 ≠ OTB2013**![Object Tracking Benchmark](http://ieeexplore.ieee.org/abstract/document/7001050/)
+
 ## TODO  
 - [ ] add road trip figure
 - [x] add link for paper&code&project
