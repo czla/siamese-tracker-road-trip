@@ -234,9 +234,10 @@
         - ***PSGN***: <br/>
             * Traditional positive sampling strategy(based on IOU) lacks diversity, thus leading to ***under-fitting***.
             * Utilize the variational autoencoder (VAE) to learn the target object manifold.
-        
-        ![PSGN](image/SINT++/PSGN.png)<br/>
-        - ***HPTN***: <br/>
+       
+        ![PSGN](image/SINT++/PSGN.png)
+
+        - ***HPTN***: 
             * ***Create occlusions*** on the target objects using image patch extracted from background.
 
 ------
@@ -255,14 +256,14 @@
         &emsp; ![response](image/DaSiamRPN/response.png)
 
         ##### Method
-        - ***Distractor-aware Training***:<br/>
+        - ***Distractor-aware Training***:
             * Diverse categories of positive pairs can promote the generalization ability.
             * Semantic negative pairs can improve the discriminative ability.
             * Customizing effective data augmentation for visual tracking.(Except the common ***translation***, ***scale variations*** and ***illumination changes***, introduce ***motion blur***)
             * Training pairs<br/>
             &emsp; ![train_pairs](image/DaSiamRPN/train_pairs.png)
         
-        - ***Distractor-aware Incremental Learning***:<br/>
+        - ***Distractor-aware Incremental Learning***:
             * Use ***NMS*** to select the potential distractors *d_i* in each frames. Then collect a distractor set *D := {∀ d_i ∈ D, f(z, d_i) > h ∩ d_i != z_t*}, where *h* is the predefined threshold, *z_t* is the selected target in frame *t* and the number of this set *|D| = n*.
             * Specifically, we get 17x17x5 proposals in each frame at first, and then we use NMS to reduce redundant candidates.
             * The proposal with highest score will be selected as the target zt. For the remaining, the proposals with scores greater than a threshold are selected as distractors.<br/>
@@ -275,6 +276,34 @@
 
 ------
 - **2018_ECCV_Siam-BM**
+    * **Siam-BM:** He A, Luo C, Tian X, et al. Towards a better match in siamese network based visual object tracker[C]. ECCV (2018). [[paper](http://openaccess.thecvf.com/content_ECCVW_2018/papers/11129/He_Towards_a_Better_Match_in_Siamese_Network_Based_Visual_Object_ECCVW_2018_paper.pdf)][[code](https://github.com/77695/Siam-BM)]
+
+        ##### Contributions	
+        - Propose to predict the ***angle*** of the target object.
+        - Propose to selectively apply a ***spatial mask*** to CNN feature maps when the possibility of distracting background objects is high.
+        - Adopt a simple ***template updating*** mechanism to cope with the gradual appearance change of the target object.
+
+        ##### Motivation
+        - Siamese network cannot properly handle large object rotation, because the CNN features are not invariant to large image transformations such as scaling and rotation.
+        - Tracking gets easily distracted when the background contains salient objects. It is hard to determine the spatial region from which DNN features should be extracted to represent the target object.
+
+        ##### Method
+        - ***Angle Estimation***:
+            *  Siam-BM tracker adjusts the properties (scale or angle) of the tracked object only one at a time. With *M* scale choices and *N* angle choices, get *M + N − 1* candidate patches.
+            * Similarly, the tracked object is determined by:<br/>
+            &emsp;&emsp;![loc](https://latex.codecogs.com/gif.latex?\large&space;(x_i,&space;y_i,&space;k_i)&space;=&space;\mathop{arg\&space;max}\limits_{x,y,k}&space;R_k,\&space;(&space;k=1,2,\cdots,M&plus;N-1))
+            * Illustration: *M=N=3*,  the highest response in the map with (1, −π/8) is significantly higher than the top values in other maps.<br/>
+        ![angles](image/Siam-BM/angles.png)
+
+        - ***Spatial Mask***:
+            * When the ***aspect ratio*** of the target object is far apart from 1 (vertical or horizontal), it is more likely to have salient objects in the background area.
+            * ***Spatial feature mask*** when the aspect ratio of target object exceeds a predefined threshold.<br/>
+            ![mask](image/Siam-BM/mask.png)<br/>
+                * Left two masks: *h/w > threshold*
+                * Right two masks: *w/h > threshold*
+                * Middle two masks: *max{w/h, h/w} < threshold*
+            * The white grids indicate a coefficient of 1 and the black grids indicate a coefficient of 0, *threshold* is set to 1.5.
+----
 - **2018_ECCV_SiamFC-tri**
 - **2018_ECCV_StructSiam**
 - **2019_CVPR_CIR**
@@ -289,7 +318,7 @@
 * **OTB2013** was proposed in the **CVPR2013**. (51 targets and 50 videos.[Jogging_1 + Jogging_2])
 [Online Object Tracking: A Benchmark](http://openaccess.thecvf.com/content_cvpr_2013/papers/Wu_Online_Object_Tracking_2013_CVPR_paper.pdf)
 * **TB-50** and **TB-100** were proposed in the **PAMI2015**. (TB-50 is consisted by 50 **difficult** sequences among TB-100. The partition can be found in http://cvlab.hanyang.ac.kr/tracker_benchmark/datasets.html ）
-* Please note that **TB-50 ≠ OTB2013**![Object Tracking Benchmark](http://ieeexplore.ieee.org/abstract/document/7001050/)
+* Please note that **TB-50 ≠ OTB2013**[Object Tracking Benchmark](http://ieeexplore.ieee.org/abstract/document/7001050/)
 
 ## TODO  
 - [ ] add road trip figure
