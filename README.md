@@ -24,6 +24,7 @@
 |   SiamRPN     |         0.58/0.56       |       0.358/0.3441        |     0.243     |      -           |           -               |        0.637      |        0.851        |      -    |       -      |    160   |
 |    SINT++     |                  -             |     -            |    -            |        -       |               -            |           0.574         |               0.768                |          0.624          |              0.839           |   <4    |
 |   DaSiamRPN     |         0.63/0.61       |       0.446/0.411        |     0.326     |      -           |           -               |        0.865(OP)      |        0.88        |      -    |       -      |    160   |
+|   Siam-BM     |         -       |       -        |     0.335     |      0.686           |           0.898               |        0.662      |        0.864        |      -    |       -      |    48   |
 
 -------
 
@@ -303,6 +304,7 @@
                 * Right two masks: *w/h > threshold*
                 * Middle two masks: *max{w/h, h/w} < threshold*
             * The white grids indicate a coefficient of 1 and the black grids indicate a coefficient of 0, *threshold* is set to 1.5.
+
 ----
 - **2018_ECCV_SiamFC-tri**
 - **2018_ECCV_StructSiam**
