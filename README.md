@@ -13,7 +13,7 @@
 |    SINT+    |                 -            |     -            |    -            |       0.655          |             0.882             |          -          |               -               |         -            |            -             |  4     |
 |    SINT     |                  -             |     -            |    -            |        0.625       |               0.848            |           -         |               -                |          -          |              -           |   4    |
 |SiameseFC-ResNet|     0.5527   |         -            |    -            |      -             |           -                       |         -             |             -                 |          -         |             -           |    25   |
-|SiameseFC-AlexNet|     0.5016   |        -            |    0.2      |       -             |           -                       |         -             |             -                 |          -         |             -           |    65   |
+|SiameseFC-AlexNet|     0.5016   |        -            |    0.2      |       0.607            |          0.809                       |        0.582             |             0.771                 |          0.516         |             0.692           |    65   |
 |   CFNet-conv1     |            -       |      -            |    -            |      0.578           |           0.714               |         0.536         |          0.658          |      0.488      |       0.613         |    83   |
 |   CFNet-conv2     |            -       |     -            |    -            |       0.611           |           0.746               |         0.568         |          0.693          |      0.530      |       0.660         |    75   |
 |   CFNet-conv5     |            -       |      -            |    -            |      0.611           |           0.736               |         0.586         |          0.711          |      0.539      |       0.670         |    43   |
@@ -306,7 +306,6 @@
             * The white grids indicate a coefficient of 1 and the black grids indicate a coefficient of 0, *threshold* is set to 1.5.
 
 ----
-- **2018_ECCV_SiamFC-tri**
 - **2018_ECCV_StructSiam**
 - **2019_CVPR_CIR**
 - **2019_CVPR_C-RPN**
