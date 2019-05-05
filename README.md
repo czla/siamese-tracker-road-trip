@@ -306,9 +306,24 @@
             * The white grids indicate a coefficient of 1 and the black grids indicate a coefficient of 0, *threshold* is set to 1.5.
 
 ----
-- **2018_ECCV_StructSiam**
-- **2019_CVPR_CIR**
 - **2019_CVPR_C-RPN**
+    * **C-RPN:** Heng Fan, Haibin Ling. "Siamese Cascaded Region Proposal Networks for Real-Time Visual Tracking." CVPR (2019).[[paper](https://arxiv.org/pdf/1812.06148.pdf)]
+
+        ##### Contributions
+         - Present a novel multistage tracking framework, solve the problem of class imbalance by performing ***hard negative sampling***. The easy negative anchors are then filtered out, and the rest, treated as hard examples, are utilized as training samples for the RPN of the next stage.
+         - C-RPN consists of multiple steps of regressions due to multiple RPNs. In each stage, the anchor boxes (including locations and sizes) are adjusted by the regressor.
+         - Design a novel ***feature transfer block***(FTB), Instead of separately using features from a single layer in one RPN, FTB enables us to fuse the high-level features into low-level RPN.
+
+         ##### Motivation
+        - ***The distribution of training samples is imbalanced***:
+            - Positive samples are far less than negative samples **=>**  ineffective training
+            - Most negative samples are easy negatives **=>** non-similar nonsemantic background contribute little useful information.
+        - ***Low-level spatial features are not fully explored***:
+            - Siamese-RPN (and other Siamese trackers), only features of the last layer, which contain more semantic information, are explored to distinguish target/background.
+            - Distractor have similar semantic features, the high-level semantic features are less discriminative in distinguishing these distractors.
+        - Propose a ***multistage tracking framework*** by cascading a sequence of RPNs to solve the ***class imbalance problem***, and meanwhile ***fully explore features*** across layers for robust visual tracking.
+
+- **2019_CVPR_SiamDW**
 - **2019_CVPR_SiamMask**
 - **2019_CVPR_SiamRPN++**
 
