@@ -361,7 +361,7 @@ the feature dimensions of different sources
             - fps: 32
         - ***Number of stages***
 
-            # Stages | One stage | Two stages | Three stages
+            #Stages | One stage | Two stages | Three stages
             :--:    | :--: | :--: |:--:
             SUC on LaSOT | 0.417 | 0.446 | 0.455
             Speed on LaSOT | 48 fps | 37 fps | 23 fps
