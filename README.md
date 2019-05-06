@@ -25,6 +25,7 @@
 |    SINT++     |                  -             |     -            |    -            |        -       |               -            |           0.574         |               0.768                |          0.624          |              0.839           |   <4    |
 |   DaSiamRPN     |         0.63/0.61       |       0.446/0.411        |     0.326     |      -           |           -               |        0.865(OP)      |        0.88        |      -    |       -      |    160   |
 |   Siam-BM     |         -       |       -        |     0.335     |      0.686           |           0.898               |        0.662      |        0.864        |      -    |       -      |    48   |
+|   C-RPN     |         /0.594       |       /0.363        |     0.289     |      0.675           |           -               |        0.663      |        -        |      -    |       -      |    36   |
 
 -------
 
@@ -323,6 +324,62 @@
             - Distractor have similar semantic features, the high-level semantic features are less discriminative in distinguishing these distractors.
         - Propose a ***multistage tracking framework*** by cascading a sequence of RPNs to solve the ***class imbalance problem***, and meanwhile ***fully explore features*** across layers for robust visual tracking.
 
+        ##### Pipeline
+        ![pipeline](image/C-RPN/pipeline.png)<br/>
+        - ***the Siamese network***: To extract the features of the target template x and the search region z.
+        - ***cascaded RPN***: Apply feature transfer block (FTB) to fuse the features from high-level layers for RPN. According to the classification scores and regression offsets, we filter out the easy negative anchors (e.g., an anchor whose negative confidence is larger than a preset threshold θ), and refine the locations and sizes of the rest anchors.
+
+        ##### RPN in Siamese Network
+        ![RPN](image/C-RPN/RPN.png)<br/>
+        - To ensure classification and regression for each anchor, two convolution layers are utilized to adjust the channel to get ϕ(x)_cls, ϕ(x)_reg and ϕ(z)_cls, ϕ(z)_reg.
+        - Classification scores **c_i** and regression offsets **r_i** can be computed as:<br/>
+            - **{c_i} = corr(ϕ(z)_cls, ϕ(x)_cls)**
+            - **{r_i} = corr(ϕ(z)_reg, ϕ(x)_reg)**
+        - *i* is the anchor index, and **corr(a, b)** denotes correlation between a and b where a is served as the kernel.
+        - Each *c_i* is a 2d vector, representing for negative and positive confidences of the *i-th* anchor.
+        - Each *r_i* is a 4d vector which represents the offsets of center point location and size of the anchor to groundtruth.
+
+        ##### Method
+        - For *l-th* RPN,  it receives fused features *Φ(z)^l* and *Φ(x)^l* of the *conv-l* layer and the highlevel layers from FTB, instead of features *ϕ(z)^l* and *ϕ(x)^l* from a single separate layer:
+            - **Φ(z)^l = FTB(Φ(z)^(l-1), ϕ(z)^l)**
+            - **Φ(x)^l = FTB(Φ(x)^(l-1), ϕ(x)^l)**
+        - For *l = 1*, *Φ(z)^1 = ϕ(z)^1, Φ(x)^1 = ϕ(x)^1*
+        - The anchors in C-RPN are progressively adjusted by the regressor in the previous stage.
+        - ***Feature Transfer Block***:
+        ![FTB](image/C-RPN/FTB.png)<br/>
+            - A deconvolution layer is used to match
+the feature dimensions of different sources
+            - Different features are fused using ***element-wise summation*** + ***ReLU***
+            - Apply the ***interpolation*** to rescale the fused features such that the output classification maps and regression maps have the same resolution for all RPN
+        
+        ##### Experiment
+        - ***LaSOT***
+            - success(SUC): 0.459(protocol I) 0.455(protocol II, testing set)
+            - fps: 23
+        - ***TrackingNet***
+            - metrics: *precision(PRE, 0.619), normalized precision (NPRE, 0.746) and success(SUC, 0.669)*
+            - fps: 32
+        - ***Number of stages***
+
+            # Stages | One stage | Two stages | Three stages
+            :--:    | :--: | :--: |:--:
+            SUC on LaSOT | 0.417 | 0.446 | 0.455
+            Speed on LaSOT | 48 fps | 37 fps | 23 fps
+            EAO on VOT-2017 | 0.248 | 0.278 | 0.289
+        - ***Negative anchor filtering(NAF)***
+
+            Index  | C-RPN w/o NAF | C-RPN w/ NAF
+            :--: | :--: | :--:
+            SUC on LaSOT | 0.439 | 0.455
+            EAV on VOT-2017 | 0.282 | 0.289
+
+        - ***Feature transfer block(FTB)***
+
+            Index  | C-RPN w/o FTB | C-RPN w/ FTB
+            :--: | :--: | :--:
+            SUC on LaSOT | 0.442 | 0.455
+            EAV on VOT-2017 | 0.278 | 0.289
+            
 - **2019_CVPR_SiamDW**
 - **2019_CVPR_SiamMask**
 - **2019_CVPR_SiamRPN++**
