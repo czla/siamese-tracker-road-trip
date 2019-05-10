@@ -381,6 +381,33 @@ the feature dimensions of different sources
             EAV on VOT-2017 | 0.278 | 0.289
             
 - **2019_CVPR_SiamDW**
+    * **SiamDW:** Zhipeng Zhang, Houwen Peng. "Deeper and Wider Siamese Networks for Real-Time Visual Tracking." CVPR (2019 **oral**).[[paper](https://arxiv.org/pdf/1901.01660.pdf)][[code](https://github.com/researchmm/SiamDW)]
+    
+        ##### Contributions
+        - Present a systematic study on the factors of backbone networks that affect tracking accuracy, and provides architectural design guidelines for the Siamese tracking framework.
+        - Design new deeper and wider network architectures for Siamese trackers, based on proposed nopadding residual units.
+
+        ##### Guidelines on network architecture
+        - ***Siamese trackers prefer a relatively small network stride***
+            - Stride affects the overlap ratio of receptive fields for two neighboring output features, thus affect ***location precision***.(prefer 4 or 8)
+        - ***The receptive field of output features should be set based on its ratio to the size of the exemplar image***
+            - Each point of feature map captures the information of different spatial parts of a target object.(ratio prefer 60% ~ 80%)
+        - ***Network stride, receptive field and output feature size should be considered as a whole when designing a network architecture***
+        - ***For a fully convolutional Siamese matching network, it is critical to handle the problem of perceptual inconsistency between the two network streams***
+
+        ##### Cropping-Inside Residual (CIR) Units<br/>
+        ![CIR](image/SiamDW/CIR.png)<br/>
+        - ***CIR Unit***: 
+            - The cropping operation removes features(*a'*) whose calculation is affected by the zero-padding signals introduced in original residual unit(*a*).
+        - ***Downsampling CIR (CIR-D) Unit***
+            - To reduce the spatial size of feature maps while doubling the number of feature channels.
+            - Change the convolutional stride from 2 to 1 within both the bottleneck layer and shortcut connection.
+            - Also insert ***Cropping*** to remove the padding-affected features.
+            - ***Max-pooling*** is employed to perform spatial downsampling of the feature map(*b'*).
+        - ***CIR-Inception and CIR-NeXt Units***
+            - Widen the CIR unit with multiple feature transformations(*c', d'*)
+        
+
 - **2019_CVPR_SiamMask**
 - **2019_CVPR_SiamRPN++**
 
