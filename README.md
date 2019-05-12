@@ -24,8 +24,9 @@
 ## Performance
 * Note
     - Ranked by publish time.
-    - Performance details are gathered from original papers, not tested under the same platform.
-    - OP: meanoverlap precision at the threshold of 0.5.
+    - Performance details are mainly gathered from original papers, not tested under the same platform.
+    - AUC: area under curve of success plot.
+    - OP: mean overlap precision at the threshold of 0.5.
     - DP/Prec.: mean distance precision of 20 pixels.
     - A: accuracy.
     - R: robustness(i.e. failure).
@@ -42,14 +43,14 @@
 |   DSiam |  0.5414   | -  |  -  |  0.642/0.860 | - |  - |  45   |
 |  DSiamM |  0.5566  |  -  |  -  |  0.656/0.891 |  -  |  - | 25 |
 | RASNet |  -/-/0.327 | - | -/-/0.281 |  0.670/0.892 | 0.642/- | - |  83  |
-| SA-Siam | 0.59/-/0.31 |  -/-/0.236 |  0.676/0.894  |  0.656/0.864  |  0.610/0.823  | 50 |
+| SA-Siam | 0.59/-/0.31 |  -/-/0.236 |  0.676/0.894  |  0.656/0.864  |  0.610/0.823  | - |  50 |
 | SiamRPN |  0.58/1.13/0.358 |  0.56/0.26/0.3441  |  0.49/0.46/0.243 |    - | 0.637/0.851 | -  | 160 |
 | SINT++ | - | - | -  | -  | 0.574/0.768 | 0.624/0.839 | <4  |
 | DaSiamRPN  | 0.63/-/0.446 | 0.61/-/0.411 | -/-/0.326 | - | 0.865(OP)/0.88 | - | 160 |
 | Siam-BM | - | - | -/-/0.335 | 0.686/0.898 | 0.662/0.864 | - | 48 |
 | C-RPN | - | 0.594/0.95/0.363  |  -/-/0.289 | 0.675/- | 0.663/- | - |36 |
-| (SiamDW)CIResNet22_FC | 0.57/-/0.31  |  0.54/0.38/0.30 | 0.50/0.49  | 0.23  | 0.67/0.88 | 0.64/0.85 |  -  | 70 |
-| (SiamDW)CIResNet22_RPN | 0.59/-/0.38  |  0.58/0.24/0.37 | 0.52/0.41/0.30  | 0.67/0.92 | 0.67/0.90 |  -  | 150 |
+| SiamDW_CIResNet22_FC | 0.57/-/0.31  |  0.54/0.38/0.30 | 0.50/0.49/0.23  | 0.67/0.88 | 0.64/0.85 |  -  | 70 |
+| SiamDW_CIResNet22_RPN | 0.59/-/0.38  |  0.58/0.24/0.37 | 0.52/0.41/0.30  | 0.67/0.92 | 0.67/0.90 |  -  | 150 |
 
 [Back to contents](#contents)
 -------
@@ -461,8 +462,8 @@ the feature dimensions of different sources
 ## About OTB
 - **OTB2013** was proposed in the **CVPR2013**. (51 targets and 50 videos.[Jogging_1 + Jogging_2])
 ([Online Object Tracking: A Benchmark](http://openaccess.thecvf.com/content_cvpr_2013/papers/Wu_Online_Object_Tracking_2013_CVPR_paper.pdf))
-- **OTB-50** and **OTB-100** were proposed in the **PAMI2015**. (OTB-50 is consisted by 50 **difficult** sequences among OTB-100. The partition can be found in http://cvlab.hanyang.ac.kr/tracker_benchmark/datasets.html)
-- Please note that **OTB-50 ≠ OTB2013** ([Object Tracking Benchmark](http://ieeexplore.ieee.org/abstract/document/7001050/))
+- **TB-50** and **TB-100** were proposed in the **PAMI2015**. (TB-50 is consisted by 50 **difficult** sequences among TB-100. The partition can be found in http://cvlab.hanyang.ac.kr/tracker_benchmark/datasets.html)
+- Please note that **TB-50 ≠ OTB2013** ([Object Tracking Benchmark](http://ieeexplore.ieee.org/abstract/document/7001050/))
 
 [Back to contents](#contents)
 ----
