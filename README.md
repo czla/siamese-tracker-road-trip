@@ -1,11 +1,31 @@
 ﻿# siamese-tracker-road-trip  <br/> 基于孪生网络的单目标跟踪论文汇总
 
+## Contents
+* [Performance](#performance)
+* [Trackers](#trackers)
+    * [2016_CVPR_SINT](#2016_CVPR_SINT)
+    * [2016_ECCV_SiameseFC](#2016_ECCV_SiameseFC)
+    * [2017_CVPR_CFNet](#2017_CVPR_CFNet)
+    * [2017_ICCV_DSiam](#2017_ICCV_DSiam)
+    * [2018_CVPR_RASNet](#2018_CVPR_RASNet)
+    * [2018_CVPR_SA-Siam](#2018_CVPR_SA-Siam)
+    * [2018_CVPR_SiameseRPN](#2018_CVPR_SiameseRPN)
+    * [2018_CVPR_SINT++](#2018_CVPR_SINT++)
+    * [2018_ECCV_DaSiamRPN](#2018_ECCV_DaSiamRPN)
+    * [2018_ECCV_Siam-BM](#2018_ECCV_Siam-BM)
+    * [2019_CVPR_C-RPN](#2019_CVPR_C-RPN)
+    * [2019_CVPR_SiamDW](#2019_CVPR_SiamDW)
+* [Survey](#survey)
+* [About OTB](#About-OTB)
+* [TODO](#todo)
+* [License](#license)
+
 ## Performance
 * Note
     - Ranked by publish time.
     - Performance details are gathered from original papers, not tested under the same platform.
     - OP: meanoverlap precision at the threshold of 0.5.
-    - DP/Precision: mean distance precision of 20 pixels.
+    - DP/Prec.: mean distance precision of 20 pixels.
     - A: accuracy.
     - R: robustness(i.e. failure).
     - EAO: expected average overlap.
@@ -30,11 +50,12 @@
 | (SiamDW)CIResNet22_FC | 0.57/-/0.31  |  0.54/0.38/0.30 | 0.50/0.49  | 0.23  | 0.67/0.88 | 0.64/0.85 |  -  | 70 |
 | (SiamDW)CIResNet22_RPN | 0.59/-/0.38  |  0.58/0.24/0.37 | 0.52/0.41/0.30  | 0.67/0.92 | 0.67/0.90 |  -  | 150 |
 
+[Back to contents](#contents)
 -------
 
 ## Trackers
 
-- **2016_CVPR_SINT**
+- ### 2016_CVPR_SINT
     * **SINT**:R. Tao, E. Gavves, and A. W. Smeulders. Siamese instance search for tracking. In IEEE Conference on Computer Vision and Pattern Recognition, 2016[[paper](http://openaccess.thecvf.com/content_cvpr_2016/papers/Tao_Siamese_Instance_Search_CVPR_2016_paper.pdf)][[code](https://github.com/taotaoorange/SINT)][[project](https://taotaoorange.github.io/projects/SINT/SINT_proj.html)]  
 
         ##### Contributions
@@ -53,8 +74,9 @@
         - The ***sampling range*** is adaptive to the image resolution, set to be 30/512 ∗ w in this experiment, where w is the image width.
         - Given the pixels covered by the predicted box in the previous frame and the estimated ***optical flow***, remove the candidate boxes that contain less than 25% of those pixels in the current frame.
 
+[Back to contents](#contents)
 -----
-- **2016_ECCV_SiameseFC**
+- ### 2016_ECCV_SiameseFC
     * **SiameseFC:** Luca Bertinetto, Jack Valmadre, João F. Henriques, Andrea Vedaldi, Philip H.S. Torr. "Fully-Convolutional Siamese Networks for Object Tracking." ECCV workshop (2016).[[paper](http://120.52.73.78/arxiv.org/pdf/1606.09549v2.pdf)][[project](http://www.robots.ox.ac.uk/~luca/siamese-fc.html)]
     [[official-code-matlab](https://github.com/bertinetto/siamese-fc)][[code-pytorch](https://github.com/mozhuangb/SiameseFC-pytorch)][[code2-pytorch](https://github.com/GengZ/siameseFC-pytorch-vot)][[code-tensorflow](https://github.com/zzh142857/SiameseFC-tf)]
 
@@ -76,8 +98,9 @@
         ![network architecture](image/SiameseFC/architecture.png)
         - ***elementary temporal constraints***: search area(four times its previous size); a cosine window is added to the score map to penalize large displacements.
 
+[Back to contents](#contents)
 -----
-- **2017_CVPR_CFNet**
+- ### 2017_CVPR_CFNet
     * **CFNet:** Jack Valmadre, Luca Bertinetto, João F. Henriques, Andrea Vedaldi, Philip H. S. Torr."End-to-end representation learning for Correlation Filter based tracking." CVPR (2017). [[paper](http://openaccess.thecvf.com/content_cvpr_2017/papers/Valmadre_End-To-End_Representation_Learning_CVPR_2017_paper.pdf)][[supp](http://openaccess.thecvf.com/content_cvpr_2017/supplemental/Valmadre_End-To-End_Representation_Learning_2017_CVPR_supplemental.pdf)][[project](http://www.robots.ox.ac.uk/~luca/cfnet.html)][[official-code-matlab](https://github.com/bertinetto/cfnet)]
 
         ##### Contributions
@@ -91,8 +114,9 @@
         - Establishing an efficient back-propagation map for the solution to a system of circulant equations.
         - Replace ![SiameseFC](https://latex.codecogs.com/gif.latex?g_p%28x%5E%7B%27%7D%2Cz%5E%7B%27%7D%29%3Df_p%28x%5E%7B%27%7D%29%5Cstar%20f_p%28z%5E%7B%27%7D%29) with ![CFNet](https://latex.codecogs.com/gif.latex?h_%7Bp%2Cs%2Cb%7D%28x%5E%7B%27%7D%2Cz%5E%7B%27%7D%29%3Dsw%28f_p%28x%5E%7B%27%7D%29%5Cstar%20f_p%28z%5E%7B%27%7D%29%29%20&plus;%20b)
 
+[Back to contents](#contents)
 -----
-- **2017_ICCV_DSiam**
+- ### 2017_ICCV_DSiam
     * **DSiam:** Qing Guo; Wei Feng; Ce Zhou; Rui Huang; Liang Wan; Song Wang."Learning Dynamic Siamese Network for Visual Object Tracking." ICCV (2017). [[paper](http://openaccess.thecvf.com/content_ICCV_2017/papers/Guo_Learning_Dynamic_Siamese_ICCV_2017_paper.pdf)] [[official-code-matlab](https://github.com/tsingqguo/DSiam)]
         ##### Contributions
         - Propose a fast ***general transformation learning*** model that enables effective online learning of ***target appearance variation*** and ***background suppression*** from previous frames.
@@ -117,8 +141,9 @@
             ![weight maps](image/DSiam/weight_map.png)  
             S: response map, layer (l1 = 5, l2=4) from AlexNet. **Note** , the response map of deeper layer l1 has higher weights in periphery and lower weights at central part within the searching region.
 
+[Back to contents](#contents)
 ------
-- **2018_CVPR_RASNet**
+- ### 2018_CVPR_RASNet
     * **RASNet:** Qiang Wang, Zhu Teng, Junliang Xing, Jin Gao, Weiming Hu, Stephen Maybank. "Learning Attentions: Residual Attentional Siamese Network for High Performance Online Visual Tracking." CVPR (2018).[[paper](http://openaccess.thecvf.com/content_cvpr_2018/papers/Wang_Learning_Attentions_Residual_CVPR_2018_paper.pdf)]
         ##### Contributions
         - Different kinds of attention mechanisms are explored within the RASNet: ***General Attention, Residual Attention***, and ***Channel Attention***.
@@ -135,8 +160,9 @@
         - Channel Attention: A convolutional ***feature channel*** often corresponds to a certain type of ***visual pattern***.  In certain circumstance some feature channels are more significant than the others.
         - Baseline: SiamFC
 
+[Back to contents](#contents)
 -----        
-- **2018_CVPR_SA-Siam**
+- ### 2018_CVPR_SA-Siam
     * **SA-Siam:** Anfeng He, Chong Luo, Xinmei Tian, Wenjun Zeng. "A Twofold Siamese Network for Real-Time Object Tracking." CVPR (2018).[[paper](http://openaccess.thecvf.com/content_cvpr_2018/papers/He_A_Twofold_Siamese_CVPR_2018_paper.pdf)][[project](https://77695.github.io/SA-Siam/)]
         ##### Contributions
         - SA-Siam is composed of a ***semantic*** branch and an ***appearance*** branch, which are trained separately to keep the heterogeneity of the two types of features.
@@ -164,8 +190,9 @@
         ![channel_attention](image/SA-Siam/channel_attention.png)<br/>
         ***Note***: this module is passed only once for the first frame of a tracking sequence. The computational overhead is negligible.
 
+[Back to contents](#contents)
 -----
-- **2018_CVPR_SiameseRPN**
+- ### 2018_CVPR_SiameseRPN
     * **SiamRPN:** Bo Li, Wei Wu, Zheng Zhu, Junjie Yan."High Performance Visual Tracking with Siamese Region Proposal Network." CVPR (2018 **Spotlight**).[[paper](http://openaccess.thecvf.com/content_cvpr_2018/papers/Li_High_Performance_Visual_CVPR_2018_paper.pdf)][[code-pytorch](https://github.com/songdejia/Siamese-RPN-pytorch)][[code-pytorch](https://github.com/HelloRicky123/Siamese-RPN)]
 
         ##### Contributions	
@@ -220,8 +247,9 @@
             * When the network is trained with Youtube-BB, the performance becomes higher when the center size increases.<br/>
             ![center_size](image/SiamRPN/center_size.png)
 
+[Back to contents](#contents)
 ---------
-- **2018_CVPR_SINT++**
+- ### 2018_CVPR_SINT++
     * **SINT++:** Xiao Wang, Chenglong Li, Bin Luo, Jin Tang. "SINT++: Robust Visual Tracking via Adversarial Positive Instance Generation." CVPR (2018). [[paper](http://openaccess.thecvf.com/content_cvpr_2018/papers/Wang_SINT_Robust_Visual_CVPR_2018_paper.pdf)]
 
         ##### Contributions	
@@ -245,8 +273,9 @@
         - ***HPTN***: 
             * ***Create occlusions*** on the target objects using image patch extracted from background.
 
+[Back to contents](#contents)
 ------
-- **2018_ECCV_DaSiamRPN**
+- ### 2018_ECCV_DaSiamRPN
     * **DaSiamRPN:** Zheng Zhu, Qiang Wang, Bo Li, Wu Wei, Junjie Yan, Weiming Hu. "Distractor-aware Siamese Networks for Visual Object Tracking." ECCV (2018). [[paper](http://openaccess.thecvf.com/content_ECCV_2018/papers/Zheng_Zhu_Distractor-aware_Siamese_Networks_ECCV_2018_paper.pdf)][[code](https://github.com/foolwood/DaSiamRPN)]
 
         ##### Contributions	
@@ -279,8 +308,9 @@
             ***SiamRPN***:<br/>
             &emsp; ![func2](https://latex.codecogs.com/gif.latex?\large&space;q&space;=&space;\mathop{argmax}\limits_{p_k&space;\in&space;P}\&space;f(z,&space;p_k)})
 
+[Back to contents](#contents)
 ------
-- **2018_ECCV_Siam-BM**
+- ### 2018_ECCV_Siam-BM
     * **Siam-BM:** He A, Luo C, Tian X, et al. Towards a better match in siamese network based visual object tracker[C]. ECCV (2018). [[paper](http://openaccess.thecvf.com/content_ECCVW_2018/papers/11129/He_Towards_a_Better_Match_in_Siamese_Network_Based_Visual_Object_ECCVW_2018_paper.pdf)][[code](https://github.com/77695/Siam-BM)]
 
         ##### Contributions	
@@ -309,8 +339,9 @@
                 * Middle two masks: *max{w/h, h/w} < threshold*
             * The white grids indicate a coefficient of 1 and the black grids indicate a coefficient of 0, *threshold* is set to 1.5.
 
+[Back to contents](#contents)
 ----
-- **2019_CVPR_C-RPN**
+- ### 2019_CVPR_C-RPN
     * **C-RPN:** Heng Fan, Haibin Ling. "Siamese Cascaded Region Proposal Networks for Real-Time Visual Tracking." CVPR (2019).[[paper](https://arxiv.org/pdf/1812.06148.pdf)]
 
         ##### Contributions
@@ -382,8 +413,10 @@ the feature dimensions of different sources
             :--: | :--: | :--:
             SUC on LaSOT | 0.442 | 0.455
             EAV on VOT-2017 | 0.278 | 0.289
-            
-- **2019_CVPR_SiamDW**
+
+[Back to contents](#contents)
+------            
+- ### 2019_CVPR_SiamDW
     * **SiamDW:** Zhipeng Zhang, Houwen Peng. "Deeper and Wider Siamese Networks for Real-Time Visual Tracking." CVPR (2019 **oral**).[[paper](https://arxiv.org/pdf/1901.01660.pdf)][[code](https://github.com/researchmm/SiamDW)]
     
         ##### Contributions
@@ -411,14 +444,17 @@ the feature dimensions of different sources
             - Widen the CIR unit with multiple feature transformations(*c', d'*)
         
         ##### Architectures<br/>
-        ![architecture](image/SiamDW/architecture.png)
+        ![architecture](image/SiamDW/Architecture.png)
         
-
+[Back to contents](#contents)
+-----
 - **2019_CVPR_SiamMask**
 - **2019_CVPR_SiamRPN++**
 
 ## Survey
 * **2017**: R. Pflugfelder. An in-depth analysis of visual tracking with siamese neural networks. arXiv:1707.00569, 2017[[paper](https://arxiv.org/pdf/1707.00569.pdf)]  
+
+[Back to contents](#contents)
 
 ## About OTB
 * **OTB2013** was proposed in the **CVPR2013**. (51 targets and 50 videos.[Jogging_1 + Jogging_2])
@@ -426,12 +462,16 @@ the feature dimensions of different sources
 * **TB-50** and **TB-100** were proposed in the **PAMI2015**. (TB-50 is consisted by 50 **difficult** sequences among TB-100. The partition can be found in http://cvlab.hanyang.ac.kr/tracker_benchmark/datasets.html ）
 * Please note that **TB-50 ≠ OTB2013**[Object Tracking Benchmark](http://ieeexplore.ieee.org/abstract/document/7001050/)
 
+[Back to contents](#contents)
+
 ## TODO  
 - [ ] add road trip figure
 - [x] add link for paper&code&project
 - [x] add core analyses
 - [x] add benchmark comparison
 - [ ] finish all paper
+
+[Back to contents](#contents)
 
 ## License
 MIT
