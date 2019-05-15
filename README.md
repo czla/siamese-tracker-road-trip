@@ -15,6 +15,7 @@
     * [2018_ECCV_Siam-BM](#2018_ECCV_Siam-BM)
     * [2019_CVPR_C-RPN](#2019_CVPR_C-RPN)
     * [2019_CVPR_SiamDW](#2019_CVPR_SiamDW)
+    * [2019_CVPR_SiamMask](#2019_CVPR_SiamMask)
 * [Survey](#survey)
 * [About OTB](#About-OTB)
 * [TODO](#todo)
@@ -22,6 +23,28 @@
 
 ---
 ## Performance
+
+|   Tracker   |VOT15(A/R/EAO) | VOT16(A/R/EAO) | VOT17(A/R/EAO) | VOT18(A/R/EAO) | OTB2013(AUC/Prec.) | OTB2015(AUC/Prec.) | OTB50(AUC/Prec.)  |  FPS  |
+| :--: |  :--: | :--: | :--: | :--: | :--: | :--: | :--:  | :--: | 
+| SINT | - |  - |  - | - |  0.625/0.848  | -  | - | 4 |
+| SINT+ | - | - | - | - | 0.655/0.882 | - | - | 4 |
+|SiamFC | 0.53/0.88/0.29 | 0.53/0.46/0.24 | 0.50/0.59/0.19 | - | 0.61/0.81 | 0.58/0.77 | 0.516/0.692 | 65 |
+| CFNet-conv1 | -  | - | - | - | 0.578/0.714 | 0.536/0.658  |  0.488/0.613   |  83 |
+| CFNet-conv2 |  -  |  -  | -  | - |  0.611/0.746 | 0.568/0.693 |  0.530/0.660 |  75   |
+| CFNet-conv5 | - |   -  |  -  | - | 0.611/0.736  |  0.586/0.711   |    0.539/0.670   |  43 |
+|   DSiam |  0.5414   | -  |  -  | - | 0.642/0.860 | - |  - |  45   |
+|  DSiamM |  0.5566  |  -  |  -  |  - | 0.656/0.891 |  -  |  - | 25 |
+| RASNet |  -/-/0.327 | - | -/-/0.281 | - | 0.670/0.892 | 0.642/- | - |  83  |
+| SA-Siam | 0.59/-/0.31 |  -/-/0.236 | - | 0.566/0.258/0.337 |  0.676/0.894  |  0.656/0.864  |  0.610/0.823  |  50 |
+| SiamRPN |  0.58/1.13/0.358 |  0.56/0.26/0.3441  |  0.49/0.46/0.243 | 0.49/0.46/0.244 |  - | 0.637/0.851 | -  | 160 |
+| SINT++ | - | - | -  | - | - | 0.574/0.768 | 0.624/0.839 | <4  |
+| DaSiamRPN  | 0.63/-/0.446 | 0.61/-/0.411 | -/-/0.326 | 0.569/0.337/0.326 | - | 0.865(OP)/0.88 | - | 160 |
+| Siam-BM | - | - | -/-/0.335 | - | 0.686/0.898 | 0.662/0.864 | - | 48 |
+| C-RPN | - | 0.594/0.95/0.363  |  -/-/0.289 | - | 0.675/- | 0.663/- | - |36 |
+| SiamDW_CIResNet22_FC | 0.57/-/0.31  |  0.54/0.38/0.30 | 0.50/0.49/0.23  | - | 0.67/0.88 | 0.64/0.85 |  -  | 70 |
+| SiamDW_CIResNet22_RPN | 0.59/-/0.38  |  0.58/0.24/0.37 | 0.52/0.41/0.30  | - |0.67/0.92 | 0.67/0.90 |  -  | 150 |
+| SiamMask | -  |  - | -  | 0.602/0.288/0.347 | - |  - | -  | 35 |
+
 * Note
     - Ranked by publish time.
     - Performance details are mainly gathered from original papers, not tested under the same platform.
@@ -31,26 +54,6 @@
     - A: accuracy.
     - R: robustness(i.e. failure).
     - EAO: expected average overlap.
-
-|   Tracker   |VOT15(A/R/EAO) | VOT16(A/R/EAO) | VOT17(A/R/EAO) |OTB2013(AUC/Prec.) | OTB2015(AUC/Prec.) | OTB50(AUC/Prec.)  |  FPS  |
-| :--: |  :--: | :--: | :--: | :--: | :--: | :--:  | :--: | 
-| SINT | - |  - |  - |  0.625/0.848  | -  | - | 4 |
-| SINT+ | - | - | - | 0.655/0.882 | - | - | 4 |
-|SiamFC | 0.53/0.88/0.29 | 0.53/0.46/0.24 | 0.50/0.59/0.19 | 0.61/0.81 | 0.58/0.77 | 0.516/0.692 | 65 |
-| CFNet-conv1 | -  | - | - | 0.578/0.714 | 0.536/0.658  |  0.488/0.613   |  83 |
-| CFNet-conv2 |  -  |  -  | -  |   0.611/0.746 | 0.568/0.693 |  0.530/0.660 |  75   |
-| CFNet-conv5 | - |   -  |  -  |  0.611/0.736  |  0.586/0.711   |    0.539/0.670   |  43 |
-|   DSiam |  0.5414   | -  |  -  |  0.642/0.860 | - |  - |  45   |
-|  DSiamM |  0.5566  |  -  |  -  |  0.656/0.891 |  -  |  - | 25 |
-| RASNet |  -/-/0.327 | - | -/-/0.281 |  0.670/0.892 | 0.642/- | - |  83  |
-| SA-Siam | 0.59/-/0.31 |  -/-/0.236 |  0.676/0.894  |  0.656/0.864  |  0.610/0.823  | - |  50 |
-| SiamRPN |  0.58/1.13/0.358 |  0.56/0.26/0.3441  |  0.49/0.46/0.243 |    - | 0.637/0.851 | -  | 160 |
-| SINT++ | - | - | -  | -  | 0.574/0.768 | 0.624/0.839 | <4  |
-| DaSiamRPN  | 0.63/-/0.446 | 0.61/-/0.411 | -/-/0.326 | - | 0.865(OP)/0.88 | - | 160 |
-| Siam-BM | - | - | -/-/0.335 | 0.686/0.898 | 0.662/0.864 | - | 48 |
-| C-RPN | - | 0.594/0.95/0.363  |  -/-/0.289 | 0.675/- | 0.663/- | - |36 |
-| SiamDW_CIResNet22_FC | 0.57/-/0.31  |  0.54/0.38/0.30 | 0.50/0.49/0.23  | 0.67/0.88 | 0.64/0.85 |  -  | 70 |
-| SiamDW_CIResNet22_RPN | 0.59/-/0.38  |  0.58/0.24/0.37 | 0.52/0.41/0.30  | 0.67/0.92 | 0.67/0.90 |  -  | 150 |
 
 [Back to contents](#contents)
 -------
@@ -450,8 +453,42 @@ the feature dimensions of different sources
         
 [Back to contents](#contents)
 -----
-- **2019_CVPR_SiamMask**
-- **2019_CVPR_SiamRPN++**
+- ### 2019_CVPR_SiamMask
+    * **SiamMask:** Qiang Wang, Li Zhang, Luca Bertinetto, Weiming Hu, Philip H.S. Torr. "Fast Online Object Tracking and Segmentation: A Unifying Approach." CVPR (2019).[[paper](https://arxiv.org/pdf/1812.05050.pdf)][[project](http://www.robots.ox.ac.uk/~qwang/SiamMask/)][[code](https://github.com/foolwood/SiamMask)]
+
+    #### Contributions
+    - Narrow the gap between arbitrary object tracking and video object segmentation(VOS)
+    - Simultaneously train a Siamese network on three tasks:
+        1. Learn a measure of similarity between the target object and multiple candidates in a sliding window fashion(Localization)
+        2. Bounding box regression using a Region Proposal Network
+        3. Classagnostic binary segmentation
+    -  Each task is represented by a different branch departing from a shared CNN and contributes towards a final loss
+
+    #### Pipeline
+    ![pipeline](image/SiamMask/pipeline.png)
+    - three-branch(based on SiamRPN)
+    - two-branch(based on SiamFC)
+    - *d denotes depth-wise cross correlation
+
+    #### Method
+    - SiamFC
+        - Each spatial element of the response map (left-hand side of following Eq.) as *response of a candidate window*(RoW)
+        - ![response](https://latex.codecogs.com/gif.latex?g_%5Ctheta%28z%2Cx%29%20%3D%20f_%5Ctheta%28z%29%20%5Cstar%20f_%5Ctheta%28x%29)
+        , for example ![row](https://latex.codecogs.com/gif.latex?g_%5Ctheta%5En%28z%2Cx%29) encodes a
+similarity between the examplar *z* and *n-th* candidate window in *x*.
+    - Mask
+        - Predict *w×h* binary masks (one for each RoW) using a simple two-layers neural network *hφ* with learnable parameters *φ*.
+        - *m_n* denote the predicted mask corresponding to the *n-th* RoW
+        - ![mask](https://latex.codecogs.com/gif.latex?m_n%3Dh_%5Cphi%28g_%5Ctheta%5En%28z%2Cx%29%29)
+    - Loss
+        - ![L_mask](https://latex.codecogs.com/gif.latex?L_%7Bmask%7D%28%5Ctheta%2C%20%5Cphi%29%3D%5Csum_n%28%5Cfrac%7B1&plus;y_n%7D%7B2wh%7D%5Csum_%7Bij%7Dlog%281&plus;e%5E%7B-c_n%5E%7Bij%7Dm_n%5E%7Bij%7D%7D%29%29)
+        - Each RoW is labelled with a ground-truth binary label *yn ∈ {±1}* and also associated with a pixel-wise ground-truth mask *c_n* of size *w×h*.
+        - ![c_ij](https://latex.codecogs.com/gif.latex?c_n%5E%7Bij%7D%20%5Cin%20%7B%5Cpm1%7D) denote the label corresponding to pixel (i, j) of the object mask in the n-th candidate RoW.
+        - *L_mask* is considered only for positive RoWs (i.e. with *y_n* = 1, one of its anchor boxes has IOU with the ground-truth box of at least 0.6).
+
+[Back to contents](#contents)
+------
+- ### 2019_CVPR_SiamRPN++
 
 ## Survey
 - **2017**: R. Pflugfelder. An in-depth analysis of visual tracking with siamese neural networks. arXiv:1707.00569, 2017[[paper](https://arxiv.org/pdf/1707.00569.pdf)] 
