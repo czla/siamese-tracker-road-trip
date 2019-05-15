@@ -63,19 +63,19 @@
 - ### 2016_CVPR_SINT
     * **SINT**:R. Tao, E. Gavves, and A. W. Smeulders. Siamese instance search for tracking. In IEEE Conference on Computer Vision and Pattern Recognition, 2016[[paper](http://openaccess.thecvf.com/content_cvpr_2016/papers/Tao_Siamese_Instance_Search_CVPR_2016_paper.pdf)][[code](https://github.com/taotaoorange/SINT)][[project](https://taotaoorange.github.io/projects/SINT/SINT_proj.html)]  
 
-        ##### Contributions
+        #### Contributions
         - Propose to learn a ***generic matching function for tracking***, from external video data, to robustly handle the common appearance variations an object can undergo in video sequences.
         - Present a ***tracker*** based on the learnt generic matching function which reaches state-of-the-art tracking performance.
         - Design a ***two-stream Siamese network*** specifically for tracking to learn the matching function.
 
-        ##### Pipeline
+        #### Pipeline
         ![pipeline](image/SINT/pipeline.png)
 
-        ##### Candidate Sampling
+        #### Candidate Sampling
         - Use the ***radius sampling strategy*** to generate candidate boxes. At each sample location, generate three scaled versions of the initial box with the scales being {√2/2, 1,√2}
     - Use Euclidean distance as similarity metric.
 
-        ##### SINT+
+        #### SINT+
         - The ***sampling range*** is adaptive to the image resolution, set to be 30/512 ∗ w in this experiment, where w is the image width.
         - Given the pixels covered by the predicted box in the previous frame and the estimated ***optical flow***, remove the candidate boxes that contain less than 25% of those pixels in the current frame.
 
@@ -85,14 +85,14 @@
     * **SiameseFC:** Luca Bertinetto, Jack Valmadre, João F. Henriques, Andrea Vedaldi, Philip H.S. Torr. "Fully-Convolutional Siamese Networks for Object Tracking." ECCV workshop (2016).[[paper](http://120.52.73.78/arxiv.org/pdf/1606.09549v2.pdf)][[project](http://www.robots.ox.ac.uk/~luca/siamese-fc.html)]
     [[official-code-matlab](https://github.com/bertinetto/siamese-fc)][[code-pytorch](https://github.com/mozhuangb/SiameseFC-pytorch)][[code2-pytorch](https://github.com/GengZ/siameseFC-pytorch-vot)][[code-tensorflow](https://github.com/zzh142857/SiameseFC-tf)]
 
-        ##### Contributions
+        #### Contributions
         - Achieves ***competitive performance*** in modern tracking benchmarks at speeds that ***far exceed the realtime requirement***.
         - Present a novel ***Siamese architecture that is fully-convolutional*** with respect to the search image.
 
-        ##### Pipeline
+        #### Pipeline
         ![pipeline](image/SiameseFC/pipeline.png)  
 
-        ##### Method
+        #### Method
         - The ***position of the maximum score*** relative to the centre of the score map, multiplied by the ***stride*** of the network, gives the displacement of the target from frame to frame.
         - Function h is ***fully-convolutional*** if: ![img](https://latex.codecogs.com/gif.latex?h%5C%28L_%7Bk%5Ctau%7Dx%5C%29%3DL_%7B%5Ctau%7Dh%5C%28x%5C%29) for integer stride k and any translation ![symbol](https://latex.codecogs.com/gif.latex?%5Ctau).
         - Train: discriminative approach, Logistic loss: ![img](https://latex.codecogs.com/gif.latex?l%5C%28y%2Cv%5C%29%3Dlog%5C%281&plus;exp%5C%28-yv%5C%29%5C%29), where v is the real-valued score of a single exemplar-candidate pair and y ∈ {+1, −1} is its ground-truth label.  
@@ -108,14 +108,14 @@
 - ### 2017_CVPR_CFNet
     * **CFNet:** Jack Valmadre, Luca Bertinetto, João F. Henriques, Andrea Vedaldi, Philip H. S. Torr."End-to-end representation learning for Correlation Filter based tracking." CVPR (2017). [[paper](http://openaccess.thecvf.com/content_cvpr_2017/papers/Valmadre_End-To-End_Representation_Learning_CVPR_2017_paper.pdf)][[supp](http://openaccess.thecvf.com/content_cvpr_2017/supplemental/Valmadre_End-To-End_Representation_Learning_2017_CVPR_supplemental.pdf)][[project](http://www.robots.ox.ac.uk/~luca/cfnet.html)][[official-code-matlab](https://github.com/bertinetto/cfnet)]
 
-        ##### Contributions
+        #### Contributions
         - Incorporating the Correlation Filter into the fully-convolutional Siamese framework(SiameseFC).
         - Reveal that adding a Correlation Filter layer does not significantly improve the tracking accuracy.
 
-        ##### Pipeline
+        #### Pipeline
         ![pipeline](image/CFNet/pipeline.png)  
 
-        ##### Method
+        #### Method
         - Establishing an efficient back-propagation map for the solution to a system of circulant equations.
         - Replace ![SiameseFC](https://latex.codecogs.com/gif.latex?g_p%28x%5E%7B%27%7D%2Cz%5E%7B%27%7D%29%3Df_p%28x%5E%7B%27%7D%29%5Cstar%20f_p%28z%5E%7B%27%7D%29) with ![CFNet](https://latex.codecogs.com/gif.latex?h_%7Bp%2Cs%2Cb%7D%28x%5E%7B%27%7D%2Cz%5E%7B%27%7D%29%3Dsw%28f_p%28x%5E%7B%27%7D%29%5Cstar%20f_p%28z%5E%7B%27%7D%29%29%20&plus;%20b)
 
@@ -123,23 +123,23 @@
 -----
 - ### 2017_ICCV_DSiam
     * **DSiam:** Qing Guo; Wei Feng; Ce Zhou; Rui Huang; Liang Wan; Song Wang."Learning Dynamic Siamese Network for Visual Object Tracking." ICCV (2017). [[paper](http://openaccess.thecvf.com/content_ICCV_2017/papers/Guo_Learning_Dynamic_Siamese_ICCV_2017_paper.pdf)] [[official-code-matlab](https://github.com/tsingqguo/DSiam)]
-        ##### Contributions
+        #### Contributions
         - Propose a fast ***general transformation learning*** model that enables effective online learning of ***target appearance variation*** and ***background suppression*** from previous frames.
         - Propose a ***elementwise multi-layer fusion***, which adaptively integrates the multi-level deep features of DSiam network.
         - Develop a complete ***joint training scheme***, DSiam can be trained as a whole directly on labeled video sequences.
 
-        ##### Pipeline
+        #### Pipeline
         ![pipeline](image/DSiam/pipeline.png)  
         - Basic pipeline of our DSiam network (orange line) and that of SiamFC(black dashed line).f^l(·) represents a CNN to extract the deep feature at lth layer.  
         - Two transformations are rapidly learned from frame t−1. When the target at frame t (redbox) is entirely different from the template O1, SiamFC gets a meaningless response map, within which no target can be detected
 
-        ##### Method
+        #### Method
         
         - Establishing an efficient back-propagation map for the solution to a system of circulant equations.
         - Replace ![SiameseFC](https://latex.codecogs.com/gif.latex?S_t%5El%3Dcorr%28f%5El%28O_1%29%2Cf%5El%28Z_t%29%29) with ![CFNet](https://latex.codecogs.com/gif.latex?S_t%5El%3Dcorr%28V_%7Bt-1%7D%5El*f%5El%28O_1%29%2CW_%7Bt-1%7D%5El*f%5El%28Z_t%29%29)
         - ![v_t-1](https://latex.codecogs.com/gif.latex?V_%7Bt-1%7D%5El) aims to encourage ![f](https://latex.codecogs.com/gif.latex?f%5El%28O_1%29) being similar to ![f](https://latex.codecogs.com/gif.latex?f%5El%28O_%7Bt-1%7D%29) and is online learned from (t − 1)th frame by considering temporally smooth variation of the target
         - ![w_t-1](https://latex.codecogs.com/gif.latex?W_%7Bt-1%7D%5El) aims to highlight the deep feature of target neighborhood regions and alleviate the interference of irrelevant background features.
-       #####  Elementwise multi-layer fusion
+       ####  Elementwise multi-layer fusion
         - Response map for each layer l is ![rmap](https://latex.codecogs.com/gif.latex?S_t%20%5Cin%20R%5E%7Bm_s%20%5Ctimes%20n_s%7D), elementwise weight map ![wmap](https://latex.codecogs.com/gif.latex?W%5El%20%5Cin%20R%5E%7Bm_s%20%5Ctimes%20n_s%7D) and ![sum](https://latex.codecogs.com/gif.latex?%5Csum_%7Bl%20%5Cin%20L%7D%20W%5El%20%3D%201_%7Bm_s%20%5Ctimes%20n_s%7D), ***final response map*** ![fmap](https://latex.codecogs.com/gif.latex?%5Csum_%7Bl%20%5Cin%20L%7D%20W%5El%20%5Codot%20S_t%5El), where ![odot](https://latex.codecogs.com/gif.latex?%5Codot) denotes the elementwise multiplication.  
 
         - Two real offline learned fusion weight maps:  
@@ -150,16 +150,16 @@
 ------
 - ### 2018_CVPR_RASNet
     * **RASNet:** Qiang Wang, Zhu Teng, Junliang Xing, Jin Gao, Weiming Hu, Stephen Maybank. "Learning Attentions: Residual Attentional Siamese Network for High Performance Online Visual Tracking." CVPR (2018).[[paper](http://openaccess.thecvf.com/content_cvpr_2018/papers/Wang_Learning_Attentions_Residual_CVPR_2018_paper.pdf)]
-        ##### Contributions
+        #### Contributions
         - Different kinds of attention mechanisms are explored within the RASNet: ***General Attention, Residual Attention***, and ***Channel Attention***.
         - Propose an end-to-end deep architecture specifically designed for the object tracking.
 
-        ##### Pipeline
+        #### Pipeline
         ![pipeline](image/RASNet/pipeline.png)  
         - Weighted cross correlation layer (WXCorr).  
         - Based on the exemplar features, three types of attentions are extracted. Exemplar and search features, along with the attentions as weights are inputed to WXCorr and finally transformed to a response map.
 
-        ##### Method
+        #### Method
         - ***Weighted Cross Correlation***: not every constituent provides the same contribution to the cross correlation operation in the Siamese network.the object within the blue rectangular region should be reflected more to the cross correlation operation compared with the green rectangular region.
         ![WXCorr](image/RASNet/WXCorr.png)
         - Channel Attention: A convolutional ***feature channel*** often corresponds to a certain type of ***visual pattern***.  In certain circumstance some feature channels are more significant than the others.
@@ -169,17 +169,17 @@
 -----        
 - ### 2018_CVPR_SA-Siam
     * **SA-Siam:** Anfeng He, Chong Luo, Xinmei Tian, Wenjun Zeng. "A Twofold Siamese Network for Real-Time Object Tracking." CVPR (2018).[[paper](http://openaccess.thecvf.com/content_cvpr_2018/papers/He_A_Twofold_Siamese_CVPR_2018_paper.pdf)][[project](https://77695.github.io/SA-Siam/)]
-        ##### Contributions
+        #### Contributions
         - SA-Siam is composed of a ***semantic*** branch and an ***appearance*** branch, which are trained separately to keep the heterogeneity of the two types of features.
         - Propose a ***channel attention mechanism*** for the semantic branch. Channel-wise weights are computed according to the channel activations around the target position.
 
-        ##### Pipeline
+        #### Pipeline
         ![pipeline](image/SA-Siam/pipeline.png)  
         - The network and data structures connected with ***dotted lines*** are exactly the same as SiamFC.
         - ***A-Net***(blue block) indicates the appearance network, which has exactly the same structure as the SiamFC network.
         - ***S-Net***(origin block) indicates the semantic network. The ***channel attention module*** determines the weight for each feature channel based on both target and context information.
 
-        ##### Method
+        #### Method
         - ***Symbols***: **z**(the images of target), **z^s**(target with surrounding context, same size as search region), **X**(search region).
         - ***The appearance branch***: 
         response ![response-a](https://latex.codecogs.com/gif.latex?h_a(z,&space;X)&space;=&space;corr(f_a(z),&space;f_a(X)))
@@ -200,12 +200,12 @@
 - ### 2018_CVPR_SiameseRPN
     * **SiamRPN:** Bo Li, Wei Wu, Zheng Zhu, Junjie Yan."High Performance Visual Tracking with Siamese Region Proposal Network." CVPR (2018 **Spotlight**).[[paper](http://openaccess.thecvf.com/content_cvpr_2018/papers/Li_High_Performance_Visual_CVPR_2018_paper.pdf)][[code-pytorch](https://github.com/songdejia/Siamese-RPN-pytorch)][[code-pytorch](https://github.com/HelloRicky123/Siamese-RPN)]
 
-        ##### Contributions	
+        #### Contributions	
         - propose the ***Siamese region proposal*** network (SiameseRPN) which is end-to-end trained off-line with large-scale image pairs for the tracking task.
         - During online tracking, the proposed framework is formulated as a ***local oneshot detection*** task, which can refine the proposal to discard the expensive multi-scale test.
         - It achieves leading performance in VOT2015, VOT2016 and VOT2017 real-time challenges with the ***speed of 160 FPS***, which proves its advantages in both ***accuracy and efficiency***.
 
-        ##### Pipeline
+        #### Pipeline
         ![pipeline](image/SiamRPN/pipeline.png)<br/>
         - ***Left***: Siamese subnetwork for feature extraction
         - ***Middle***: Region proposal subnetwork, which has a ***classification*** branch and a ***regression*** branch. Pair-wise correlation is adopted to obtain the output of two branches.
@@ -214,7 +214,7 @@
             * In regression branch, the output feature map has ***4k*** channels which corresponding to four coordinates used for proposal refinement of ***k anchors***.
             * In the figure, ⋆ denotes correlation operator
 
-        ##### Method
+        #### Method
         - ***Loss Function***: 
             * For classification(***cross-entropy*** loss), for regression(***smooth L1*** loss), which is same as ***Faster R-CNN***.
             * Regression: Use ***normalized coordinates***, Let Ax, Ay, Aw, Ah denote center point and shape of the anchor boxes and let Tx, Ty, Tw, Th denote those of the ground truth boxes, the normalized distance is:<br/>
@@ -237,7 +237,7 @@
                 ![proposal](image/SiamRPN/proposal.png)
                 - strategy 2: Use ***cosine window*** and ***scale change penalty*** to re-rank the proposals’ score to get the best one.
             * ***Non-maximum-suppression***: NMS is performed afterwards to get the final tracking bounding box.
-        ##### Discussion
+        #### Discussion
         - ***Anchor ratios***: 3 ratios are tried, [0.5, 1, 2], [0.33, 0.5, 1, 2, 3], [0.25, 0.33, 0.5, 1, 2, 3, 4] (denoted as A3, A5, A7, respectively).<br/>
             * A5 performs better than A3, because it’s easier to predict the shape of target with large ratio of height and width through more anchors.
             * A7's performance drops by ***over-fitting***.
@@ -257,18 +257,18 @@
 - ### 2018_CVPR_SINT++
     * **SINT++:** Xiao Wang, Chenglong Li, Bin Luo, Jin Tang. "SINT++: Robust Visual Tracking via Adversarial Positive Instance Generation." CVPR (2018). [[paper](http://openaccess.thecvf.com/content_cvpr_2018/papers/Wang_SINT_Robust_Visual_CVPR_2018_paper.pdf)]
 
-        ##### Contributions	
+        #### Contributions	
         - Propose a novel and general ***positive sample generation network(PSGN)*** to bridge the gap between data hunger deep neural networks and visual tracking task.
         - Introduce the ***hard positive transformation network(HPTN)*** which can generate massive hard positive samples.
         - Propose the ***SINT++*** which improves tracking performance of the two streaming Siamese network.
 
-        ##### Pipeline
+        #### Pipeline
         ![pipeline](image/SINT++/pipeline.png)<br/>
         - ***Three modules***: PSGN, HPTN and two streaming Siamese network.
         - The target object manifold is constructed by ***variational auto-encoder(VAE)*** , and the output can be directly input to the HPTN.
         - The HPTN takes the reconstructed image as input, and learn to occlude the target which become hard for visual tracker to measure via deep reinforcement learning. 
 
-        ##### Method
+        #### Method
         - ***PSGN***: <br/>
             * Traditional positive sampling strategy(based on IOU) lacks diversity, thus leading to ***under-fitting***.
             * Utilize the variational autoencoder (VAE) to learn the target object manifold.
@@ -283,18 +283,18 @@
 - ### 2018_ECCV_DaSiamRPN
     * **DaSiamRPN:** Zheng Zhu, Qiang Wang, Bo Li, Wu Wei, Junjie Yan, Weiming Hu. "Distractor-aware Siamese Networks for Visual Object Tracking." ECCV (2018). [[paper](http://openaccess.thecvf.com/content_ECCV_2018/papers/Zheng_Zhu_Distractor-aware_Siamese_Networks_ECCV_2018_paper.pdf)][[code](https://github.com/foolwood/DaSiamRPN)]
 
-        ##### Contributions	
+        #### Contributions	
         - Find that the imbalance of the ***non-semantic*** background and ***semantic distractor*** in the training data is the main obstacle for the learning.
         - Propose a novel Distractor-aware Siamese Region Proposal Networks(DaSiamRPN) framework to learn distractor-aware features in the off-line training, and explicitly suppress distractors during the inference of online tracking.
         - Extend the DaSiamRPN to perform ***long-term*** tracking by introducing a simple yet effective local-to-global search region strategy, which significantly improves the performance of our tracker in ***out-of-view and full occlusion*** challenges.
 
-        ##### Motivation
+        #### Motivation
         - The non-semantic background occupies the majority, while semantic entities and distractor occupy less. This imbalanced distribution makes the training model hard to learn instance-level representation, but tending to learn the differences between foreground and background.
         - Actively generate more semantics pairs in the offline training process.
         - Response comparasion<br/>
         &emsp; ![response](image/DaSiamRPN/response.png)
 
-        ##### Method
+        #### Method
         - ***Distractor-aware Training***:
             * Diverse categories of positive pairs can promote the generalization ability.
             * Semantic negative pairs can improve the discriminative ability.
@@ -318,16 +318,16 @@
 - ### 2018_ECCV_Siam-BM
     * **Siam-BM:** He A, Luo C, Tian X, et al. Towards a better match in siamese network based visual object tracker[C]. ECCV (2018). [[paper](http://openaccess.thecvf.com/content_ECCVW_2018/papers/11129/He_Towards_a_Better_Match_in_Siamese_Network_Based_Visual_Object_ECCVW_2018_paper.pdf)][[code](https://github.com/77695/Siam-BM)]
 
-        ##### Contributions	
+        #### Contributions	
         - Propose to predict the ***angle*** of the target object.
         - Propose to selectively apply a ***spatial mask*** to CNN feature maps when the possibility of distracting background objects is high.
         - Adopt a simple ***template updating*** mechanism to cope with the gradual appearance change of the target object.
 
-        ##### Motivation
+        #### Motivation
         - Siamese network cannot properly handle large object rotation, because the CNN features are not invariant to large image transformations such as scaling and rotation.
         - Tracking gets easily distracted when the background contains salient objects. It is hard to determine the spatial region from which DNN features should be extracted to represent the target object.
 
-        ##### Method
+        #### Method
         - ***Angle Estimation***:
             *  Siam-BM tracker adjusts the properties (scale or angle) of the tracked object only one at a time. With *M* scale choices and *N* angle choices, get *M + N − 1* candidate patches.
             * Similarly, the tracked object is determined by:<br/>
@@ -349,12 +349,12 @@
 - ### 2019_CVPR_C-RPN
     * **C-RPN:** Heng Fan, Haibin Ling. "Siamese Cascaded Region Proposal Networks for Real-Time Visual Tracking." CVPR (2019).[[paper](https://arxiv.org/pdf/1812.06148.pdf)]
 
-        ##### Contributions
+        #### Contributions
          - Present a novel multistage tracking framework, solve the problem of class imbalance by performing ***hard negative sampling***. The easy negative anchors are then filtered out, and the rest, treated as hard examples, are utilized as training samples for the RPN of the next stage.
          - C-RPN consists of multiple steps of regressions due to multiple RPNs. In each stage, the anchor boxes (including locations and sizes) are adjusted by the regressor.
          - Design a novel ***feature transfer block***(FTB), Instead of separately using features from a single layer in one RPN, FTB enables us to fuse the high-level features into low-level RPN.
 
-         ##### Motivation
+         #### Motivation
         - ***The distribution of training samples is imbalanced***:
             - Positive samples are far less than negative samples **=>**  ineffective training
             - Most negative samples are easy negatives **=>** non-similar nonsemantic background contribute little useful information.
@@ -363,12 +363,12 @@
             - Distractor have similar semantic features, the high-level semantic features are less discriminative in distinguishing these distractors.
         - Propose a ***multistage tracking framework*** by cascading a sequence of RPNs to solve the ***class imbalance problem***, and meanwhile ***fully explore features*** across layers for robust visual tracking.
 
-        ##### Pipeline
+        #### Pipeline
         ![pipeline](image/C-RPN/pipeline.png)<br/>
         - ***the Siamese network***: To extract the features of the target template x and the search region z.
         - ***cascaded RPN***: Apply feature transfer block (FTB) to fuse the features from high-level layers for RPN. According to the classification scores and regression offsets, we filter out the easy negative anchors (e.g., an anchor whose negative confidence is larger than a preset threshold θ), and refine the locations and sizes of the rest anchors.
 
-        ##### RPN in Siamese Network
+        #### RPN in Siamese Network
         ![RPN](image/C-RPN/RPN.png)<br/>
         - To ensure classification and regression for each anchor, two convolution layers are utilized to adjust the channel to get ϕ(x)_cls, ϕ(x)_reg and ϕ(z)_cls, ϕ(z)_reg.
         - Classification scores **c_i** and regression offsets **r_i** can be computed as:<br/>
@@ -378,7 +378,7 @@
         - Each *c_i* is a 2d vector, representing for negative and positive confidences of the *i-th* anchor.
         - Each *r_i* is a 4d vector which represents the offsets of center point location and size of the anchor to groundtruth.
 
-        ##### Method
+        #### Method
         - For *l-th* RPN,  it receives fused features *Φ(z)^l* and *Φ(x)^l* of the *conv-l* layer and the highlevel layers from FTB, instead of features *ϕ(z)^l* and *ϕ(x)^l* from a single separate layer:
             - **Φ(z)^l = FTB(Φ(z)^(l-1), ϕ(z)^l)**
             - **Φ(x)^l = FTB(Φ(x)^(l-1), ϕ(x)^l)**
@@ -391,7 +391,7 @@ the feature dimensions of different sources
             - Different features are fused using ***element-wise summation*** + ***ReLU***
             - Apply the ***interpolation*** to rescale the fused features such that the output classification maps and regression maps have the same resolution for all RPN
         
-        ##### Experiment
+        #### Experiment
         - ***LaSOT***
             - success(SUC): 0.459(protocol I) 0.455(protocol II, testing set)
             - fps: 23
@@ -424,11 +424,11 @@ the feature dimensions of different sources
 - ### 2019_CVPR_SiamDW
     * **SiamDW:** Zhipeng Zhang, Houwen Peng. "Deeper and Wider Siamese Networks for Real-Time Visual Tracking." CVPR (2019 **oral**).[[paper](https://arxiv.org/pdf/1901.01660.pdf)][[code](https://github.com/researchmm/SiamDW)]
     
-        ##### Contributions
+        #### Contributions
         - Present a systematic study on the factors of backbone networks that affect tracking accuracy, and provides architectural design guidelines for the Siamese tracking framework.
         - Design new deeper and wider network architectures for Siamese trackers, based on proposed nopadding residual units.
 
-        ##### Guidelines on network architecture
+        #### Guidelines on network architecture
         - ***Siamese trackers prefer a relatively small network stride***
             - Stride affects the overlap ratio of receptive fields for two neighboring output features, thus affect ***location precision***.(prefer 4 or 8)
         - ***The receptive field of output features should be set based on its ratio to the size of the exemplar image***
@@ -436,7 +436,7 @@ the feature dimensions of different sources
         - ***Network stride, receptive field and output feature size should be considered as a whole when designing a network architecture***
         - ***For a fully convolutional Siamese matching network, it is critical to handle the problem of perceptual inconsistency between the two network streams***
 
-        ##### Cropping-Inside Residual (CIR) Units<br/>
+        #### Cropping-Inside Residual (CIR) Units<br/>
         ![CIR](image/SiamDW/CIR.png)<br/>
         - ***CIR Unit***: 
             - The cropping operation removes features(*a'*) whose calculation is affected by the zero-padding signals introduced in original residual unit(*a*).
@@ -448,7 +448,7 @@ the feature dimensions of different sources
         - ***CIR-Inception and CIR-NeXt Units***
             - Widen the CIR unit with multiple feature transformations(*c', d'*)
         
-        ##### Architectures<br/>
+        #### Architectures<br/>
         ![architecture](image/SiamDW/Architecture.png)
         
 [Back to contents](#contents)
@@ -481,7 +481,7 @@ similarity between the examplar *z* and *n-th* candidate window in *x*.
         - *m_n* denote the predicted mask corresponding to the *n-th* RoW
         - ![mask](https://latex.codecogs.com/gif.latex?m_n%3Dh_%5Cphi%28g_%5Ctheta%5En%28z%2Cx%29%29)
     - Loss
-        - ![L_mask](https://latex.codecogs.com/gif.latex?L_%7Bmask%7D%28%5Ctheta%2C%20%5Cphi%29%3D%5Csum_n%28%5Cfrac%7B1&plus;y_n%7D%7B2wh%7D%5Csum_%7Bij%7Dlog%281&plus;e%5E%7B-c_n%5E%7Bij%7Dm_n%5E%7Bij%7D%7D%29%29)
+    ![L_mask](https://latex.codecogs.com/gif.latex?L_%7Bmask%7D%28%5Ctheta%2C%20%5Cphi%29%3D%5Csum_n%28%5Cfrac%7B1&plus;y_n%7D%7B2wh%7D%5Csum_%7Bij%7Dlog%281&plus;e%5E%7B-c_n%5E%7Bij%7Dm_n%5E%7Bij%7D%7D%29%29)
         - Each RoW is labelled with a ground-truth binary label *yn ∈ {±1}* and also associated with a pixel-wise ground-truth mask *c_n* of size *w×h*.
         - ![c_ij](https://latex.codecogs.com/gif.latex?c_n%5E%7Bij%7D%20%5Cin%20%7B%5Cpm1%7D) denote the label corresponding to pixel (i, j) of the object mask in the n-th candidate RoW.
         - *L_mask* is considered only for positive RoWs (i.e. with *y_n* = 1, one of its anchor boxes has IOU with the ground-truth box of at least 0.6).
