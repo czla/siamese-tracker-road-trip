@@ -16,6 +16,7 @@
     * [2019_CVPR_C-RPN](#2019_CVPR_C-RPN)
     * [2019_CVPR_SiamDW](#2019_CVPR_SiamDW)
     * [2019_CVPR_SiamMask](#2019_CVPR_SiamMask)
+    * [2019_CVPR_SiamRPN++](#2019_CVPR_SiamRPN++)
 * [Survey](#survey)
 * [About OTB](#About-OTB)
 * [TODO](#todo)
@@ -38,12 +39,13 @@
 | SA-Siam | 0.59/-/0.31 |  -/-/0.236 | - | 0.566/0.258/0.337 |  0.676/0.894  |  0.656/0.864  |  0.610/0.823  |  50 |
 | SiamRPN |  0.58/1.13/0.358 |  0.56/0.26/0.3441  |  0.49/0.46/0.243 | 0.49/0.46/0.244 |  - | 0.637/0.851 | -  | 160 |
 | SINT++ | - | - | -  | - | - | 0.574/0.768 | 0.624/0.839 | <4  |
-| DaSiamRPN  | 0.63/-/0.446 | 0.61/-/0.411 | -/-/0.326 | 0.569/0.337/0.326 | - | 0.865(OP)/0.88 | - | 160 |
+| DaSiamRPN  | 0.63/-/0.446 | 0.61/-/0.411 | -/-/0.326 | 0.569/0.337/0.326 | - | 0.658/0.88 | - | 160 |
 | Siam-BM | - | - | -/-/0.335 | - | 0.686/0.898 | 0.662/0.864 | - | 48 |
 | C-RPN | - | 0.594/0.95/0.363  |  -/-/0.289 | - | 0.675/- | 0.663/- | - |36 |
 | SiamDW_CIResNet22_FC | 0.57/-/0.31  |  0.54/0.38/0.30 | 0.50/0.49/0.23  | - | 0.67/0.88 | 0.64/0.85 |  -  | 70 |
 | SiamDW_CIResNet22_RPN | 0.59/-/0.38  |  0.58/0.24/0.37 | 0.52/0.41/0.30  | - |0.67/0.92 | 0.67/0.90 |  -  | 150 |
 | SiamMask | -  |  - | -  | 0.602/0.288/0.347 | - |  - | -  | 35 |
+| SiamRPN |  - |  -  |  - | 0.600/0.234/0.414 |  - | 0.696/0.910 | -  | 160 |
 
 * Note
     - Ranked by publish time.
@@ -489,6 +491,63 @@ similarity between the examplar *z* and *n-th* candidate window in *x*.
 [Back to contents](#contents)
 ------
 - ### 2019_CVPR_SiamRPN++
+    * **SiamRPN++:** Bo Li, Wei Wu, Qiang Wang, Fangyi Zhang, Junliang Xing, Junjie Yan. "SiamRPN++: Evolution of Siamese Visual Tracking with Very Deep Networks." CVPR (2019 oral).[paper][project]
+
+    #### Contributions
+    - Provide a deep analysis of Siamese trackers and prove that when using deep networks the decrease in accuracy comes from the destroy of the ***strict translation invariance***.
+    - Present a simple yet effective ***sampling strategy*** to break the spatial invariance restriction which successfully trains Siamese tracker driven by a ResNet architecture.
+    - Propose a ***layer wise feature aggregation structure*** for the cross-correlation operation, which helps the tracker to predict the similarity map from features learned at multiple levels.
+    - Propose a ***depth-wise separable correlation structure*** to enhance the cross-correlation to produce multiple similarity maps associated with different semantic meanings.
+
+    #### Spatial aware sampling strategy
+    - Padding will destroy the strict translation invariance.
+    - First, targets are placed in the center with different shift ranges (0, 16 and 32) in three sepreate training experiments. After convergence, aggregate the heatmaps generated on test dataset and then visualize the results.<br/>
+    ![sample_strategy](image/SiamRPN++/sample_strategy.png)
+
+    #### Pipeline
+    ![pipeline](image/SiamRPN++/pipeline.png)
+    - Features from earlier layers will mainly focus on low level information such as color, shape, are essential for localization, while lacking of semantic information;
+    - Features from latter layers have rich semantic information that can be beneficial during some challenge scenarios like motion blur, huge deformation.
+    - A weighted-fusion layer combines all the outputs.
+
+    #### Depthwise Cross Correlation
+    &emsp;&emsp; ![DW-XCorr](image/SiamRPN++/DW-XCorr.png)<br/>
+    - XCorr: Predicts a single channel similarity map between target template and search patches in SiamFC
+    - UP-Corr: Outputs a multi-channel correlation features by cascading a heavy convolutional layer with several independent XCorr layers in SiamRPN
+    - DW-XCorr:  Predicts multi-channel correlation features between a template and search patches
+
+    #### Other results
+    - UAV123
+
+    Trackers | AUC | Prec.
+    :--: | :--: | :--:
+    SiamRPN++ | 0.613 | 0.807
+    DaSiamRPN | 0.586 | 0.796
+    SiamRPN | 0.527 | 0.748
+    ECO | 0.525 | 0.741
+    ECO-HC | 0.506 | 0.725
+
+    - LaSOT
+
+    Trackers | AUC | Normalized Prec.
+    :--: | :--: | :--:
+    SiamRPN++ | 0.496 | 0.569
+    DaSiamRPN | 0.415 | 0.496
+    SiamFC | 0.336 | 0.420
+    ECO | 0.324 | 0.338
+    ECO-HC | 0.304 | 0.320
+
+    - TrackingNet
+
+    Index | ECO | SiamFC | CFNet | DaSiamRPN | SiamRPN++
+    :--: | :--: | :--: | :--: | :--: | :--:
+    AUC(%) | 55.4 | 57.1 | 57.8 | 63.8 | 73.3
+    P(%) | 49.2 | 53.3 | 53.3 | 59.1 | 69.4
+    P_norm(%) | 61.8 | 66.3 | 65.4 | 73.3 | 80.0
+
+
+[Back to contents](#contents)
+------
 
 ## Survey
 - **2017**: R. Pflugfelder. An in-depth analysis of visual tracking with siamese neural networks. arXiv:1707.00569, 2017[[paper](https://arxiv.org/pdf/1707.00569.pdf)] 
@@ -510,7 +569,7 @@ similarity between the examplar *z* and *n-th* candidate window in *x*.
 - [x] add link for paper&code&project
 - [x] add core analyses
 - [x] add benchmark comparison
-- [ ] finish all paper
+- [x] finish all paper
 
 [Back to contents](#contents)
 ---
