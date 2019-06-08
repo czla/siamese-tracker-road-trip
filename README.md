@@ -491,7 +491,7 @@ similarity between the examplar *z* and *n-th* candidate window in *x*.
 [Back to contents](#contents)
 ------
 - ### 2019_CVPR_SiamRPN++
-    * **SiamRPN++:** Bo Li, Wei Wu, Qiang Wang, Fangyi Zhang, Junliang Xing, Junjie Yan. "SiamRPN++: Evolution of Siamese Visual Tracking with Very Deep Networks." CVPR (2019 oral).[paper][project]
+    * **SiamRPN++:** Bo Li, Wei Wu, Qiang Wang, Fangyi Zhang, Junliang Xing, Junjie Yan. "SiamRPN++: Evolution of Siamese Visual Tracking with Very Deep Networks." CVPR (2019 oral).[[paper](https://arxiv.org/pdf/1812.11703.pdf)][[project](http://bo-li.info/SiamRPN++/)]
 
     #### Contributions
     - Provide a deep analysis of Siamese trackers and prove that when using deep networks the decrease in accuracy comes from the destroy of the ***strict translation invariance***.
