@@ -349,7 +349,7 @@
 [Back to contents](#contents)
 ----
 - ### 2019_CVPR_C-RPN
-    * **C-RPN:** Heng Fan, Haibin Ling. "Siamese Cascaded Region Proposal Networks for Real-Time Visual Tracking." CVPR (2019).[[paper](https://arxiv.org/pdf/1812.06148.pdf)]
+    * **C-RPN:** Heng Fan, Haibin Ling. "Siamese Cascaded Region Proposal Networks for Real-Time Visual Tracking." CVPR (2019). [[paper](http://openaccess.thecvf.com/content_CVPR_2019/papers/Fan_Siamese_Cascaded_Region_Proposal_Networks_for_Real-Time_Visual_Tracking_CVPR_2019_paper.pdf)][[supp](http://openaccess.thecvf.com/content_CVPR_2019/supplemental/Fan_Siamese_Cascaded_Region_CVPR_2019_supplemental.pdf)]
 
         #### Contributions
          - Present a novel multistage tracking framework, solve the problem of class imbalance by performing ***hard negative sampling***. The easy negative anchors are then filtered out, and the rest, treated as hard examples, are utilized as training samples for the RPN of the next stage.
@@ -424,7 +424,7 @@ the feature dimensions of different sources
 [Back to contents](#contents)
 ------            
 - ### 2019_CVPR_SiamDW
-    * **SiamDW:** Zhipeng Zhang, Houwen Peng. "Deeper and Wider Siamese Networks for Real-Time Visual Tracking." CVPR (2019 **oral**).[[paper](https://arxiv.org/pdf/1901.01660.pdf)][[code](https://github.com/researchmm/SiamDW)]
+    * **SiamDW:** Zhipeng Zhang, Houwen Peng. "Deeper and Wider Siamese Networks for Real-Time Visual Tracking." CVPR (2019 **oral**).[[paper](http://openaccess.thecvf.com/content_CVPR_2019/papers/Zhang_Deeper_and_Wider_Siamese_Networks_for_Real-Time_Visual_Tracking_CVPR_2019_paper.pdf)][[supp](http://openaccess.thecvf.com/content_CVPR_2019/supplemental/Zhang_Deeper_and_Wider_CVPR_2019_supplemental.pdf)][[code](https://github.com/researchmm/SiamDW)]
     
         #### Contributions
         - Present a systematic study on the factors of backbone networks that affect tracking accuracy, and provides architectural design guidelines for the Siamese tracking framework.
@@ -456,7 +456,7 @@ the feature dimensions of different sources
 [Back to contents](#contents)
 -----
 - ### 2019_CVPR_SiamMask
-    * **SiamMask:** Qiang Wang, Li Zhang, Luca Bertinetto, Weiming Hu, Philip H.S. Torr. "Fast Online Object Tracking and Segmentation: A Unifying Approach." CVPR (2019).[[paper](https://arxiv.org/pdf/1812.05050.pdf)][[project](http://www.robots.ox.ac.uk/~qwang/SiamMask/)][[code](https://github.com/foolwood/SiamMask)]
+    * **SiamMask:** Qiang Wang, Li Zhang, Luca Bertinetto, Weiming Hu, Philip H.S. Torr. "Fast Online Object Tracking and Segmentation: A Unifying Approach." CVPR (2019).[[paper](http://openaccess.thecvf.com/content_CVPR_2019/papers/Wang_Fast_Online_Object_Tracking_and_Segmentation_A_Unifying_Approach_CVPR_2019_paper.pdf)][[supp](http://openaccess.thecvf.com/content_CVPR_2019/supplemental/Wang_Fast_Online_Object_CVPR_2019_supplemental.pdf)][[project](http://www.robots.ox.ac.uk/~qwang/SiamMask/)][[code](https://github.com/foolwood/SiamMask?utm_campaign=explore-email&utm_medium=email&utm_source=newsletter&utm_term=daily)]
 
     #### Contributions
     - Narrow the gap between arbitrary object tracking and video object segmentation(VOS)
@@ -491,7 +491,7 @@ similarity between the examplar *z* and *n-th* candidate window in *x*.
 [Back to contents](#contents)
 ------
 - ### 2019_CVPR_SiamRPN++
-    * **SiamRPN++:** Bo Li, Wei Wu, Qiang Wang, Fangyi Zhang, Junliang Xing, Junjie Yan. "SiamRPN++: Evolution of Siamese Visual Tracking with Very Deep Networks." CVPR (2019 oral).[[paper](https://arxiv.org/pdf/1812.11703.pdf)][[project](http://bo-li.info/SiamRPN++/)]
+    * **SiamRPN++:** Bo Li, Wei Wu, Qiang Wang, Fangyi Zhang, Junliang Xing, Junjie Yan. "SiamRPN++: Evolution of Siamese Visual Tracking with Very Deep Networks." CVPR (2019 oral).[[paper](http://openaccess.thecvf.com/content_CVPR_2019/papers/Li_SiamRPN_Evolution_of_Siamese_Visual_Tracking_With_Very_Deep_Networks_CVPR_2019_paper.pdf)][[project](http://bo-li.info/SiamRPN++/)]
 
     #### Contributions
     - Provide a deep analysis of Siamese trackers and prove that when using deep networks the decrease in accuracy comes from the destroy of the ***strict translation invariance***.
